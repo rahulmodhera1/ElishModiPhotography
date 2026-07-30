@@ -43,7 +43,10 @@ export function Work({
     [filter],
   );
 
-  const filters = [{ id: "all" as const, label: "All" }, ...categories];
+  const filters = [
+    { id: "all" as const, label: "All" },
+    ...categories.map((c) => ({ id: c.id, label: c.label })),
+  ];
 
   return (
     <section id="work" className="border-t border-rule-soft py-24 sm:py-32">

@@ -16,9 +16,24 @@ Three files cover almost everything anyone will want to change.
 
 | To change | Edit |
 | --- | --- |
-| Name, city, email, phone, Instagram, service area, bio, pricing, testimonials | `src/lib/site.ts` |
-| Which photos appear, their category, alt text and grid placement | `src/lib/work.ts` |
+| Name, city, email, phone, Instagram, service area, bio, testimonials, pricing notes | `src/lib/site.ts` |
+| The six offerings, their prices and descriptions, and the whole photo manifest | `src/lib/work.ts` |
 | The photographs themselves | `public/images/` (see `public/images/README.md`) |
+
+The six offerings and their prices come from the client and are real:
+
+| Offering | Price |
+| --- | --- |
+| Baby Photos | $120 CAD fixed |
+| Child Photos | $60 CAD per guest |
+| Family Photos | $60 CAD per guest |
+| Individual Portraits | $120 CAD fixed |
+| Vehicle Photography | $60 CAD fixed |
+| Landscape Photos | $500 CAD fixed |
+
+Prices live in the `offerings` array in `src/lib/work.ts`, next to the thing
+being priced, so the offering cards and the portfolio categories cannot drift
+apart. The descriptions beside them are placeholder.
 
 **Every string in `src/lib/site.ts` is placeholder copy.** It is written in a
 photographer's voice rather than lorem ipsum so the layout can be judged
@@ -67,8 +82,10 @@ needs to change.
 ## Before launch
 
 - [ ] Replace every image in `public/images/`
-- [ ] Rewrite all copy in `src/lib/site.ts`, especially the testimonials
-- [ ] Confirm the real prices in `packages`
+- [ ] Rewrite all copy in `src/lib/site.ts`, especially the testimonials, which
+      are currently invented and need to be real, permissioned client quotes
+- [ ] Rewrite the six `blurb` descriptions in `src/lib/work.ts` in Elish's words
+- [ ] Confirm what each session includes, in `pricingNotes`
 - [ ] Confirm the real city and service area
 - [ ] Point `NEXT_PUBLIC_SITE_URL` at the production domain so OG tags resolve
 - [ ] Wire the inquiry endpoint to a real mail transport

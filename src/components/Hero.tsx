@@ -86,8 +86,8 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.34, ease: EASE }}
         >
-          Portrait, editorial and wedding work made slowly, in daylight where possible,
-          for people who would rather not perform.
+          Babies, children, families and portraits, made slowly and in daylight where
+          possible, for people who would rather not perform.
         </motion.p>
 
         <motion.div

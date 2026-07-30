@@ -42,42 +42,53 @@ function panel(w, h, label, seed) {
   </svg>`);
 }
 
-/** [relative path, width, height, label] */
+/**
+ * [relative path, width, height, label]
+ *
+ * Dimensions here must match the width/height recorded in src/lib/work.ts, or
+ * the reserved box will not match the file and the page will shift on load.
+ */
 const FILES = [
   ["hero/hero.jpg", 2400, 1600, "hero image"],
   ["about/portrait.jpg", 1400, 1750, "photographer portrait"],
   ["og/og-image.jpg", 1200, 630, "social share"],
 
-  ["work/portrait/portrait-01.jpg", 1200, 1500, "portrait 01"],
-  ["work/portrait/portrait-02.jpg", 1800, 1200, "portrait 02"],
-  ["work/portrait/portrait-03.jpg", 1200, 1500, "portrait 03"],
-  ["work/portrait/portrait-04.jpg", 1200, 1200, "portrait 04"],
+  ["work/baby/baby-01.jpg", 1200, 1500, "baby 01"],
+  ["work/baby/baby-02.jpg", 1200, 1200, "baby 02"],
+  ["work/baby/baby-03.jpg", 1200, 1500, "baby 03"],
 
-  ["work/editorial/editorial-01.jpg", 1800, 1200, "editorial 01"],
-  ["work/editorial/editorial-02.jpg", 1200, 1600, "editorial 02"],
-  ["work/editorial/editorial-03.jpg", 1800, 1200, "editorial 03"],
-  ["work/editorial/editorial-04.jpg", 1200, 1500, "editorial 04"],
+  ["work/child/child-01.jpg", 1800, 1200, "child 01"],
+  ["work/child/child-02.jpg", 1200, 1500, "child 02"],
+  ["work/child/child-03.jpg", 1800, 1200, "child 03"],
 
-  ["work/weddings/weddings-01.jpg", 1800, 1200, "weddings 01"],
-  ["work/weddings/weddings-02.jpg", 1200, 1500, "weddings 02"],
-  ["work/weddings/weddings-03.jpg", 1200, 1500, "weddings 03"],
-  ["work/weddings/weddings-04.jpg", 2000, 1125, "weddings 04"],
+  ["work/family/family-01.jpg", 1800, 1200, "family 01"],
+  ["work/family/family-02.jpg", 1800, 1200, "family 02"],
+  ["work/family/family-03.jpg", 1200, 1500, "family 03"],
 
-  ["work/commercial/commercial-01.jpg", 1200, 1500, "commercial 01"],
-  ["work/commercial/commercial-02.jpg", 1800, 1200, "commercial 02"],
-  ["work/commercial/commercial-03.jpg", 1200, 1200, "commercial 03"],
-  ["work/commercial/commercial-04.jpg", 1800, 1200, "commercial 04"],
+  ["work/portraits/portraits-01.jpg", 1200, 1500, "portraits 01"],
+  ["work/portraits/portraits-02.jpg", 1200, 1500, "portraits 02"],
+  ["work/portraits/portraits-03.jpg", 1800, 1200, "portraits 03"],
+
+  ["work/vehicle/vehicle-01.jpg", 1800, 1200, "vehicle 01"],
+  ["work/vehicle/vehicle-02.jpg", 1800, 1200, "vehicle 02"],
+  ["work/vehicle/vehicle-03.jpg", 1200, 1200, "vehicle 03"],
+
+  ["work/landscape/landscape-01.jpg", 2000, 1125, "landscape 01"],
+  ["work/landscape/landscape-02.jpg", 1800, 1200, "landscape 02"],
+  ["work/landscape/landscape-03.jpg", 2000, 1125, "landscape 03"],
 ];
 
-const SPECIALTY_CARDS = [
-  ["specialties/portrait.jpg", 1200, 1500, "portrait"],
-  ["specialties/editorial.jpg", 1200, 1500, "editorial"],
-  ["specialties/weddings.jpg", 1200, 1500, "weddings"],
-  ["specialties/commercial.jpg", 1200, 1500, "commercial"],
+const OFFERING_CARDS = [
+  ["offerings/baby.jpg", 1600, 1200, "baby photos"],
+  ["offerings/child.jpg", 1200, 1500, "child photos"],
+  ["offerings/family.jpg", 1200, 1500, "family photos"],
+  ["offerings/portraits.jpg", 1600, 1200, "individual portraits"],
+  ["offerings/vehicle.jpg", 1600, 1200, "vehicle photography"],
+  ["offerings/landscape.jpg", 1200, 1500, "landscape photos"],
 ];
 
 async function main() {
-  const all = [...FILES, ...SPECIALTY_CARDS];
+  const all = [...FILES, ...OFFERING_CARDS];
   for (const [rel, w, h, label] of all) {
     const out = join(ROOT, rel);
     await mkdir(dirname(out), { recursive: true });

@@ -19,16 +19,20 @@ public/images/
 │   └── hero.jpg           the single strongest frame in the book, 2400x1600 or wider
 ├── about/
 │   └── portrait.jpg       a real photo of Elish, portrait crop, roughly 4:5
-├── specialties/
-│   ├── portrait.jpg       the four service cards, portrait crop, roughly 4:5
-│   ├── editorial.jpg
-│   ├── weddings.jpg
-│   └── commercial.jpg
-├── work/
-│   ├── portrait/
-│   ├── editorial/
-│   ├── weddings/
-│   └── commercial/
+├── offerings/             the six service cards. Wide cells are 4:3, narrow are 4:5
+│   ├── baby.jpg
+│   ├── child.jpg
+│   ├── family.jpg
+│   ├── portraits.jpg
+│   ├── vehicle.jpg
+│   └── landscape.jpg
+├── work/                  the portfolio itself, one folder per category
+│   ├── baby/
+│   ├── child/
+│   ├── family/
+│   ├── portraits/
+│   ├── vehicle/
+│   └── landscape/
 └── og/
     └── og-image.jpg       social share card, exactly 1200x630
 ```
@@ -42,14 +46,17 @@ Two steps.
 
 ```ts
 {
-  src: "/images/work/portrait/portrait-05.jpg",
-  category: "portrait",
-  alt: "Sana on the fire escape, late afternoon, backlit",
+  src: "/images/work/family/family-04.jpg",
+  category: "family",
+  alt: "The Okonkwos on the fire escape, late afternoon, backlit",
   width: 1200,
   height: 1500,
   scale: "tall",
 },
 ```
+
+Valid categories are `baby`, `child`, `family`, `portraits`, `vehicle` and
+`landscape`. TypeScript will reject anything else.
 
 The filter chips, the counts, the grid rhythm and the lightbox all read from
 that array. There is no second place to update.
@@ -69,5 +76,5 @@ that array. There is no second place to update.
   soft on a retina screen.
 - Export as **JPEG with an sRGB profile.** Serving is WebP, converted at build
   time.
-- Keep the four category folders balanced. The grid reads best with at least
-  four frames per category.
+- Keep the six category folders balanced. The grid reads best with at least
+  three or four frames per category.

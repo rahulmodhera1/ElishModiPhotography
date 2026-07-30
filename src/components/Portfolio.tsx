@@ -2,11 +2,11 @@
 
 import { useCallback, useState } from "react";
 import type { CategoryId } from "@/lib/work";
-import { Specialties } from "./Specialties";
+import { Offerings } from "./Offerings";
 import { Work } from "./Work";
 
 /**
- * Holds the one piece of state the specialty cards and the portfolio grid
+ * Holds the one piece of state the offering cards and the portfolio grid
  * share. Keeping it here means both sections stay client leaves and the rest
  * of the page can render on the server.
  */
@@ -25,7 +25,7 @@ export function Portfolio() {
 
   return (
     <>
-      <Specialties onSelect={selectFromCard} />
+      <Offerings onSelect={selectFromCard} />
       <Work filter={filter} onFilterChange={setFilter} />
     </>
   );

@@ -13,7 +13,7 @@ export function Footer() {
               {site.wordmark}
             </p>
             <p className="mt-4 max-w-[34ch] text-[0.9375rem] leading-relaxed text-paper-dim">
-              Portrait, editorial and wedding photography, made unhurried.
+              Family, portrait and newborn photography, made unhurried.
             </p>
           </div>
 

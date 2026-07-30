@@ -9,10 +9,11 @@
 export const site = {
   name: "Elish Modi",
   wordmark: "Elish Modi",
-  /* PLACEHOLDER: swap for the real base city and service radius. */
+  /* PLACEHOLDER: swap for the real base city and service radius. Prices are
+     quoted in CAD throughout, so the base is assumed to be Canada. */
   city: "Toronto",
   serviceArea: "Toronto and the GTA, available across Ontario and for travel",
-  discipline: "Portrait & Editorial Photographer",
+  discipline: "Portrait & Family Photographer",
 
   /* PLACEHOLDER contact details. Replace all three before the site goes live. */
   email: "hello@elishmodi.com",
@@ -39,75 +40,63 @@ export const nav = [
 export const about = {
   heading: "I photograph people the way they actually are.",
   body: [
-    "I started shooting on a borrowed film body in my last year of school and never really put it down. Fourteen years later I still work slowly, still shoot a roll or two alongside the digital, and still think the best frame usually arrives after the one everybody expected.",
+    "I started shooting on a borrowed film body in my last year of school and never really put it down. Years later I still work slowly, still shoot a roll or two alongside the digital, and still think the best frame usually arrives after the one everybody expected.",
+    "Most of my work is people: newborns, kids who will not sit still, whole families, and portraits for anyone who would rather not perform. I also shoot cars and landscapes, usually for someone who wants one great print of something they love.",
     "Sessions run unhurried on purpose. We talk first, we walk, and somewhere in there you forget the camera is out. That is the frame I am waiting for.",
   ],
   pullQuote:
     "A portrait is not a pose you hold. It is the half second right after you stop holding it.",
-  specialties: ["Portrait", "Editorial", "Weddings", "Commercial", "35mm film"],
+  specialties: ["Babies", "Children", "Families", "Portraits", "Vehicles", "Landscapes"],
 } as const;
 
-/* PLACEHOLDER testimonials. Replace with real, permissioned client quotes. */
+/**
+ * PLACEHOLDER testimonials. These are invented and must be replaced with real,
+ * permissioned client quotes before launch.
+ *
+ * Keep them pointed at offerings that actually exist. A quote praising a shoot
+ * that is not on the price list reads as borrowed copy.
+ */
 export const testimonials = [
   {
     quote:
-      "We booked a founder profile and got something closer to a character study.",
+      "He came when our daughter was nine days old and worked around her, not the other way round.",
     name: "Priya Raghunathan",
-    role: "Head of Brand, Marlowe & Fen",
+    role: "Baby session",
   },
   {
     quote:
-      "He shot our wedding like a guest who happened to be brilliant. Nobody felt watched.",
+      "Three generations and two toddlers in one afternoon. Nobody felt managed, and we still got the frame we wanted.",
     name: "Dan Okonkwo",
-    role: "Married in Prince Edward County",
+    role: "Family session",
   },
   {
     quote:
-      "I have been photographed a lot and I usually hate it. This was the first set I did not want to cut.",
+      "I have been photographed a lot and I usually hate it. This is the first portrait of me I actually use.",
     name: "Simone Vasquez",
-    role: "Stage actor",
+    role: "Individual portrait",
   },
 ] as const;
 
-/* PLACEHOLDER pricing. Confirm real numbers with the client before launch. */
-export const packages = [
-  {
-    name: "Portrait Session",
-    from: "$650",
-    duration: "90 minutes, one location",
-    includes: [
-      "Pre-shoot call to plan looks and light",
-      "25 finished frames, hand graded",
-      "Web and print files, delivered in ten days",
-    ],
-  },
-  {
-    name: "Editorial & Brand",
-    from: "$1,900",
-    duration: "Half or full day, crew as needed",
-    includes: [
-      "Treatment, shot list and location scout",
-      "Full licensed gallery, usage agreed up front",
-      "Retouching on selects, rush delivery available",
-    ],
-    featured: true,
-  },
-  {
-    name: "Wedding Coverage",
-    from: "$3,400",
-    duration: "Eight hours, second shooter included",
-    includes: [
-      "Engagement session in the lead up",
-      "Roughly 600 finished frames plus a film set",
-      "Print-ready archive and an album credit",
-    ],
-  },
-] as const;
+/**
+ * The per-session prices live with the offerings in src/lib/work.ts, next to
+ * the thing being priced, so there is one place to edit and no chance of the
+ * two lists drifting apart.
+ *
+ * These are the notes that sit under them. PLACEHOLDER: confirm what is
+ * actually included and what travel costs before launch.
+ */
+export const pricingNotes = {
+  heading: "What the price covers.",
+  body: "Every session includes the shoot itself, a hand-graded gallery of finished frames, and files sized for both print and web. Per-guest pricing counts everyone being photographed. Travel beyond the GTA and any rush delivery get quoted before we book.",
+} as const;
 
+/* Mirrors the six offerings, plus an escape hatch for anything unlisted. */
 export const shootTypes = [
-  "Portrait",
-  "Editorial or brand",
-  "Wedding",
-  "Commercial",
-  "Not sure yet",
+  "Baby photos",
+  "Child photos",
+  "Family photos",
+  "Individual portraits",
+  "Vehicle photography",
+  "Landscape photos",
+  "Something else",
 ] as const;
