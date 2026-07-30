@@ -41,9 +41,16 @@ honestly, but none of it is Elish's actual words, prices or clients. The
 testimonials in particular are invented and must be replaced with real,
 permissioned quotes before launch.
 
-Every image in `public/images/` is a generated tonal placeholder, not
-photography. Regenerate them with `node scripts/generate-placeholders.mjs` if
-you ever need a clean set back.
+Five real photographs are in: Elish's own portrait in About, two baby frames,
+one family frame and one landscape. Everything else in `public/images/` is
+still a generated tonal placeholder. Regenerate the placeholder set with
+`node scripts/generate-placeholders.mjs`.
+
+`scripts/import-photos.mjs` shows how the real ones were brought in: resized to
+2400px on the long edge, re-encoded with mozjpeg, and **stripped of EXIF**.
+That last part matters for a family photographer. Camera and phone originals
+routinely carry GPS coordinates, and publishing them can pin the location of a
+client's home. Never copy an original straight into `public/`.
 
 ## Adding a photo
 
@@ -81,7 +88,10 @@ needs to change.
 
 ## Before launch
 
-- [ ] Replace every image in `public/images/`
+- [ ] Replace the remaining placeholder images, above all `hero/hero.jpg`,
+      which should be the single strongest frame in the book
+- [ ] Fill out the thinner categories: child, portraits and vehicle have no
+      real photographs yet
 - [ ] Rewrite all copy in `src/lib/site.ts`, especially the testimonials, which
       are currently invented and need to be real, permissioned client quotes
 - [ ] Rewrite the six `blurb` descriptions in `src/lib/work.ts` in Elish's words

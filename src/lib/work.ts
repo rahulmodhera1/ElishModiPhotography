@@ -43,7 +43,7 @@ export const offerings = [
     blurb:
       "Newborn and first-year sessions, shot at your place in whatever light the room gives us.",
     image: "/images/offerings/baby.jpg",
-    alt: "Placeholder: baby offering card, infant in soft window light",
+    alt: "A baby wrapped in a pink blanket, looking straight up at the camera",
   },
   {
     id: "child" as const,
@@ -62,7 +62,7 @@ export const offerings = [
     blurb:
       "Everyone in one frame, plus the in-between moments that usually turn out better.",
     image: "/images/offerings/family.jpg",
-    alt: "Placeholder: family offering card, group outdoors in late light",
+    alt: "A father carrying his daughter in a chest carrier on a clifftop path",
   },
   {
     id: "portraits" as const,
@@ -91,7 +91,7 @@ export const offerings = [
     blurb:
       "Commissioned landscape work, scouted and delivered print-ready at large format.",
     image: "/images/offerings/landscape.jpg",
-    alt: "Placeholder: landscape offering card, wide view with strong horizon",
+    alt: "The lakeshore at sunset, town and water framed through a narrow gap",
   },
 ];
 
@@ -119,28 +119,34 @@ export type Photo = {
 };
 
 export const photos: Photo[] = [
+  /*
+    The first real frames. All four are 3:2 out of the camera, so they sit in
+    slots that crop them gently: "half" is 3:2 exactly, "wide" trims a little,
+    "full" letterboxes. None of them go in a "tall" slot, which would cut a
+    landscape frame down to 4:5 and lose half the composition.
+  */
   {
     src: "/images/work/family/family-01.jpg",
     category: "family",
-    alt: "Placeholder: family of four on a porch step, late afternoon light",
-    width: 1800,
-    height: 1200,
-    scale: "wide",
+    alt: "A father carrying his daughter in a chest carrier on a clifftop path, both squinting into low sun",
+    width: 2400,
+    height: 1600,
+    scale: "half",
   },
   {
     src: "/images/work/baby/baby-01.jpg",
     category: "baby",
-    alt: "Placeholder: newborn asleep on a knitted blanket, overhead frame",
-    width: 1200,
-    height: 1500,
-    scale: "tall",
+    alt: "A newborn's curled hand held sharp in the foreground, her face soft behind it",
+    width: 2400,
+    height: 1600,
+    scale: "half",
   },
   {
     src: "/images/work/landscape/landscape-01.jpg",
     category: "landscape",
-    alt: "Placeholder: wide valley at first light, low mist along the treeline",
-    width: 2000,
-    height: 1125,
+    alt: "The lakeshore at sunset, the town and the water framed through a narrow gap",
+    width: 2400,
+    height: 1600,
     scale: "full",
   },
   {
@@ -165,15 +171,15 @@ export const photos: Photo[] = [
     alt: "Placeholder: sports car in profile against a concrete wall",
     width: 1800,
     height: 1200,
-    scale: "wide",
+    scale: "tall",
   },
   {
     src: "/images/work/baby/baby-02.jpg",
     category: "baby",
-    alt: "Placeholder: parent's hands holding a newborn's feet, close crop",
-    width: 1200,
-    height: 1200,
-    scale: "tall",
+    alt: "A baby wrapped in a pink blanket, looking straight up at the camera",
+    width: 2400,
+    height: 1600,
+    scale: "wide",
   },
   {
     src: "/images/work/family/family-02.jpg",
@@ -261,7 +267,9 @@ export const photos: Photo[] = [
     alt: "Placeholder: car interior, dashboard detail in low evening light",
     width: 1200,
     height: 1200,
-    scale: "half",
+    /* Full width so the unfiltered grid ends on a complete row rather than a
+       lone third-width tile. */
+    scale: "full",
   },
 ];
 

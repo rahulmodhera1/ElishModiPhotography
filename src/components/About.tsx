@@ -17,7 +17,7 @@ export function About() {
           <div className="relative aspect-[4/5] w-full overflow-hidden bg-ink-raised">
             <Image
               src="/images/about/portrait.jpg"
-              alt="Placeholder: portrait of the photographer. Replace with a real frame of Elish."
+              alt="Elish Modi, photographed in a lobby in a white shirt, turned toward the camera"
               fill
               quality={88}
               sizes="(max-width: 1024px) 100vw, 560px"
