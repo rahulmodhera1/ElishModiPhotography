@@ -37,6 +37,19 @@
   --color-gold: #c9a961;
 
   /*
+    The same gold, lifted for small type sitting directly on a photograph.
+    Not a second colour: same hue, higher luminance.
+
+    Gold has roughly half the luminance of the off-white, so an 11px gold
+    label needs a much darker bed than a headline does to clear WCAG AA.
+    Measured against the brightest 5% of pixels behind it, the standard gold
+    reached only 3.90:1 over the hero, and darkening the scrim far enough to
+    fix that started burying the photograph. Lifting the type instead costs
+    nothing visually and clears the bar.
+  */
+  --color-gold-bright: #d9bc6a;
+
+  /*
     Functional only, never decorative: form validation and failed submissions.
     Gold cannot carry an error state, because nobody reads gold as "something
     went wrong". This is a state colour, not a second brand accent, and it

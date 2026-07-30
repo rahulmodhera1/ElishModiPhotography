@@ -37,15 +37,23 @@ export function Hero() {
     <section
       ref={ref}
       id="top"
-      className="relative flex min-h-[100dvh] flex-col justify-end overflow-hidden"
+      /*
+        isolate creates a stacking context. Without it the layers below would
+        need negative z-indexes to sit behind the copy, and a negative z-index
+        child escapes its parent when the parent is not a stacking context: it
+        paints behind the body background, which is opaque here, so the
+        photograph disappears entirely. Everything in this section is at zero
+        or above.
+      */
+      className="relative isolate flex min-h-[100dvh] flex-col justify-end overflow-hidden"
     >
       <motion.div
-        className="absolute inset-0 -z-10"
+        className="absolute inset-0 z-0"
         style={reduce ? undefined : { transform }}
       >
         <Image
           src="/images/hero/hero.jpg"
-          alt="Placeholder: full bleed hero frame. Replace with the single strongest image in the book."
+          alt="A castle at the end of a formal garden path, framed by trees, in monochrome"
           fill
           priority
           quality={90}
@@ -54,16 +62,34 @@ export function Hero() {
         />
       </motion.div>
 
-      {/* Scrim. Without it the headline is white type on unknown photography,
-          which is a contrast failure waiting for the client's first upload. */}
+      {/*
+        Two scrims, not one.
+
+        The vertical pass darkens the foot of the frame. On its own it was not
+        enough: measured against the brightest 5% of pixels behind each line,
+        the gold eyebrow fell to 1.92:1 where it crossed sunlit stone, which is
+        a straight legibility failure. The page average looked fine, which is
+        exactly why an average is the wrong test for type over a photograph.
+
+        The horizontal pass fixes it by weighting the darkness to the left,
+        where all the copy lives, and leaving the right side of the frame open
+        so the building is still doing its job. Both are kept generous enough
+        to hold up if this photograph is swapped for a brighter one.
+      */}
       <div
         aria-hidden
-        className="absolute inset-0 -z-10 bg-gradient-to-t from-ink via-ink/55 to-ink/25"
+        className="absolute inset-0 z-0 bg-gradient-to-t from-ink via-ink/55 to-ink/15"
+      />
+      <div
+        aria-hidden
+        className="absolute inset-0 z-0 bg-gradient-to-r from-ink via-ink/45 to-transparent"
       />
 
-      <div className="mx-auto w-full max-w-[1400px] px-5 pb-16 pt-24 sm:px-8 sm:pb-24">
+      <div className="relative z-10 mx-auto w-full max-w-[1400px] px-5 pb-16 pt-24 sm:px-8 sm:pb-24">
         <motion.p
-          className="eyebrow"
+          /* gold-bright, not gold: this is the only eyebrow that sits on a
+             photograph rather than on the page ground. See globals.css. */
+          className="eyebrow text-gold-bright"
           initial={reduce ? { opacity: 0 } : { opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.15, ease: EASE }}

@@ -216,10 +216,12 @@ export const photos: Photo[] = [
   {
     src: "/images/work/landscape/landscape-02.jpg",
     category: "landscape",
-    alt: "Placeholder: lone building against open sky, long lens compression",
-    width: 1800,
-    height: 1200,
+    alt: "A castle at the end of a formal garden path, framed by trees on both sides",
+    width: 2400,
+    height: 1600,
     scale: "wide",
+    /* Also the master for the hero. scripts/grade-hero.mjs reads this file and
+       writes the graded monochrome version to public/images/hero/hero.jpg. */
   },
   {
     src: "/images/work/family/family-03.jpg",
