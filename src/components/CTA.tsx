@@ -8,20 +8,27 @@ import type { ComponentProps } from "react";
  * finger reads as broken, and 140ms is short enough that the feedback arrives
  * before the user has finished pressing.
  *
- * Contrast: solid is paper on ink (near maximum), quiet is paper on a 1px rule
- * over an ink ground. Neither ever sits on bare photography without a scrim.
+ * The primary stays white on black rather than gold on black. White is the
+ * higher contrast of the two and this is the button the whole page is pointing
+ * at, so legibility wins. Gold goes to the secondary, which is where it can be
+ * seen without competing: a gold hairline and gold label beside a solid white
+ * button is the pairing that reads as considered rather than as two buttons
+ * fighting.
+ *
+ * Contrast on ink: paper 17.99, gold 8.79. Both clear AA comfortably, and
+ * neither ever sits on bare photography without a scrim behind it.
  */
 
 const base =
   "motion-safe-transform inline-flex items-center justify-center whitespace-nowrap " +
   "px-7 h-12 text-[0.8125rem] uppercase tracking-[0.18em] " +
   "duration-[140ms] ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.98] " +
-  "focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-safelight";
+  "focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-gold";
 
 const variants = {
   solid: "bg-paper text-ink hover:bg-white",
   quiet:
-    "border border-rule text-paper hover:border-paper/45 hover:bg-paper/[0.06]",
+    "border border-rule-gold text-gold hover:border-gold hover:bg-gold/[0.08]",
 } as const;
 
 type Variant = keyof typeof variants;

@@ -97,7 +97,9 @@ export function Lightbox({
           transition={{ duration: 0.22, ease: EASE }}
         >
           <div className="flex items-center justify-between px-5 py-5 sm:px-8">
-            <p className="font-sans text-[0.6875rem] uppercase tracking-[0.28em] text-paper-dim tabular-nums">
+            {/* Gold here because the lightbox is the one full-screen moment on
+                the site, and the counter is the only standing type in it. */}
+            <p className="font-sans text-[0.6875rem] uppercase tracking-[0.28em] text-gold tabular-nums">
               {String(index + 1).padStart(2, "0")} of {String(photos.length).padStart(2, "0")}
             </p>
             <button

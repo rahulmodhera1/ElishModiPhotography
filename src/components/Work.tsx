@@ -87,7 +87,7 @@ export function Work({
                   {active ? (
                     <motion.span
                       layoutId="filter-underline"
-                      className="absolute inset-x-0 bottom-0 h-px bg-safelight"
+                      className="absolute inset-x-0 bottom-0 h-px bg-gold"
                       transition={{ duration: 0.3, ease: EASE }}
                     />
                   ) : null}
@@ -137,7 +137,7 @@ export function Work({
             <button
               type="button"
               onClick={() => onFilterChange("all")}
-              className="motion-safe-transform mt-7 text-[0.75rem] uppercase tracking-[0.2em] text-safelight duration-[140ms] active:scale-[0.98]"
+              className="motion-safe-transform mt-7 text-[0.75rem] uppercase tracking-[0.2em] text-gold duration-[140ms] active:scale-[0.98]"
             >
               Show everything
             </button>

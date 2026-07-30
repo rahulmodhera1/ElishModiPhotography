@@ -3,33 +3,51 @@
 /*
   ELISH MODI PHOTOGRAPHY - design tokens
 
-  Theme is LOCKED DARK for the whole page. This is deliberate, not an oversight:
-  the photography is the product, and a near-black surround is how prints are
-  hung and how galleries are lit. No section inverts to a light theme.
+  Black, white, and gold. Theme is LOCKED DARK for the whole page: the
+  photography is the product, and a near-black surround is how prints are hung
+  and how galleries are lit. No section inverts to a light theme.
 
-  Palette commitment (one accent, used everywhere, never a second one):
-    ink      near-black charcoal, page ground
-    paper    warm off-white, all type and the primary CTA fill
-    safelight  the single accent. A darkroom-amber, desaturated so it reads
-               as a signal rather than a colour story.
+    ink     near-black. Not #000: pure black flattens the grain and kills the
+            sense of depth behind the photographs.
+    paper   off-white, near-neutral. Held just off pure white and just off warm
+            so it reads as white next to gold rather than drifting to cream.
+    gold    the one accent. An antique champagne rather than a saturated
+            metallic yellow, which is the difference between expensive and
+            costume. Used only as small marks: hairlines, prices, eyebrows,
+            active states, focus. Never as a large fill.
+
+  Gold is deliberately rationed. It is the thing your eye finds, so the moment
+  it covers area it stops being an accent and starts being a colour scheme.
+
+  Contrast, measured against ink, all clearing WCAG AA for body text:
+    paper 17.99   paper-dim 8.22   paper-faint 5.59   gold 8.79   alert 6.59
 */
 
 @theme {
   /* Surfaces */
-  --color-ink: #0b0b0c;
-  --color-ink-raised: #131315;
+  --color-ink: #0a0a0b;
+  --color-ink-raised: #131314;
 
   /* Type */
-  --color-paper: #efede8;
-  --color-paper-dim: #a3a19c;
-  --color-paper-faint: #6d6b67;
+  --color-paper: #f5f4f1;
+  --color-paper-dim: #a8a7a3;
+  --color-paper-faint: #8a8884;
 
   /* The one accent */
-  --color-safelight: #d96a3d;
+  --color-gold: #c9a961;
+
+  /*
+    Functional only, never decorative: form validation and failed submissions.
+    Gold cannot carry an error state, because nobody reads gold as "something
+    went wrong". This is a state colour, not a second brand accent, and it
+    appears nowhere else on the page.
+  */
+  --color-alert: #e5736a;
 
   /* Hairlines */
-  --color-rule: rgba(239, 237, 232, 0.14);
-  --color-rule-soft: rgba(239, 237, 232, 0.07);
+  --color-rule: rgba(245, 244, 241, 0.14);
+  --color-rule-soft: rgba(245, 244, 241, 0.07);
+  --color-rule-gold: rgba(201, 169, 97, 0.32);
 
   --font-display: var(--font-bodoni), ui-serif, Georgia, serif;
   --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
@@ -72,7 +90,7 @@ body {
   is defined here. Keyboard users get the accent, mouse users get nothing.
 */
 :focus-visible {
-  outline: 2px solid var(--color-safelight);
+  outline: 2px solid var(--color-gold);
   outline-offset: 3px;
 }
 :focus:not(:focus-visible) {
@@ -80,7 +98,7 @@ body {
 }
 
 ::selection {
-  background-color: var(--color-safelight);
+  background-color: var(--color-gold);
   color: var(--color-ink);
 }
 
@@ -91,6 +109,11 @@ body {
 
 /*
   Eyebrow label. Used a maximum of three times on the whole page.
+
+  Set in gold. These are the smallest type on the page and they sit above the
+  largest, so a little gold here reads as a considered detail rather than
+  decoration, and it puts the accent at the top of two key sections without
+  spending any area on it.
 */
 .eyebrow {
   font-size: 0.6875rem;
@@ -99,7 +122,7 @@ body {
   line-height: 1.6;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: var(--color-paper-dim);
+  color: var(--color-gold);
 }
 
 /*

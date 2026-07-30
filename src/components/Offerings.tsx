@@ -73,11 +73,11 @@ export function Offerings({ onSelect }: { onSelect: (id: CategoryId) => void }) 
                   <p className="mt-2.5 max-w-[44ch] text-[0.9375rem] leading-relaxed text-paper-dim">
                     {item.blurb}
                   </p>
-                  <p className="mt-4 text-[0.75rem] uppercase tracking-[0.2em] text-safelight">
+                  <p className="mt-4 text-[0.75rem] uppercase tracking-[0.2em] text-gold">
                     {formatPrice(item.price, item.unit)}
                   </p>
                 </div>
-                <span className="motion-safe-transform mt-2 shrink-0 text-paper-faint duration-[300ms] ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:text-safelight group-hover:translate-x-1 group-hover:-translate-y-1">
+                <span className="motion-safe-transform mt-2 shrink-0 text-paper-faint duration-[300ms] ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:text-gold group-hover:translate-x-1 group-hover:-translate-y-1">
                   <ArrowUpRightIcon size={22} weight="light" />
                 </span>
               </div>

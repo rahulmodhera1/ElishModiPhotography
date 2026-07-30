@@ -61,7 +61,7 @@ export function Nav() {
                 {item.label}
                 {/* Underline wipes in from the left rather than fading, so the
                     hover reads as directional instead of decorative. */}
-                <span className="absolute -bottom-1.5 left-0 h-px w-full origin-left scale-x-0 bg-safelight transition-transform duration-[220ms] ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-x-100" />
+                <span className="absolute -bottom-1.5 left-0 h-px w-full origin-left scale-x-0 bg-gold transition-transform duration-[220ms] ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-x-100" />
               </a>
             ))}
           </nav>

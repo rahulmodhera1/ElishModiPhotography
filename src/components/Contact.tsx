@@ -16,8 +16,13 @@ import { Reveal } from "./Reveal";
  * problem in the right place rather than in a summary at the top.
  *
  * Every input clears WCAG AA against the ink ground: paper text on ink,
- * paper-dim placeholders, and a safelight focus rule that is the same accent
+ * paper-faint placeholders, and a gold focus rule that is the same accent
  * used everywhere else on the page.
+ *
+ * Errors are the one place gold is not used. Nobody reads gold as "something
+ * went wrong", so validation messages get the alert token instead, and the
+ * field they belong to takes a matching border. That token exists for this
+ * purpose only and appears nowhere else on the site.
  */
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -26,9 +31,12 @@ type Status = "idle" | "sending" | "sent" | "failed";
 type Errors = Partial<Record<"name" | "email" | "shootType" | "message", string>>;
 
 const field =
-  "w-full border border-rule bg-transparent px-4 py-3.5 text-[0.9375rem] text-paper " +
+  "w-full border bg-transparent px-4 py-3.5 text-[0.9375rem] text-paper " +
   "placeholder:text-paper-faint transition-colors duration-200 " +
-  "hover:border-paper/30 focus:border-safelight focus:outline-none";
+  "hover:border-paper/30 focus:border-gold focus:outline-none " +
+  /* aria-invalid drives the colour, so the border and the screen-reader state
+     can never disagree about whether a field is in error. */
+  "border-rule aria-invalid:border-alert";
 
 export function Contact() {
   const [status, setStatus] = useState<Status>("idle");
@@ -97,7 +105,7 @@ export function Contact() {
                 <button
                   type="button"
                   onClick={() => setStatus("idle")}
-                  className="motion-safe-transform mt-8 text-[0.75rem] uppercase tracking-[0.2em] text-safelight duration-[140ms] active:scale-[0.98]"
+                  className="motion-safe-transform mt-8 text-[0.75rem] uppercase tracking-[0.2em] text-gold duration-[140ms] active:scale-[0.98]"
                 >
                   Send another
                 </button>
@@ -193,9 +201,9 @@ export function Contact() {
                 </div>
 
                 {status === "failed" ? (
-                  <p role="alert" className="border border-safelight/45 px-4 py-3 text-sm text-paper">
+                  <p role="alert" className="border border-alert/50 px-4 py-3 text-sm text-paper">
                     That did not send. Try again, or write to{" "}
-                    <a href={`mailto:${site.email}`} className="text-safelight underline underline-offset-4">
+                    <a href={`mailto:${site.email}`} className="text-alert underline underline-offset-4">
                       {site.email}
                     </a>
                     .
@@ -220,7 +228,7 @@ export function Contact() {
                 <dd className="mt-2.5">
                   <a
                     href={`mailto:${site.email}`}
-                    className="font-display text-[1.5rem] text-paper transition-colors duration-200 hover:text-safelight sm:text-[1.75rem]"
+                    className="font-display text-[1.5rem] text-paper transition-colors duration-200 hover:text-gold sm:text-[1.75rem]"
                   >
                     {site.email}
                   </a>
@@ -234,7 +242,7 @@ export function Contact() {
                 <dd className="mt-2.5">
                   <a
                     href={`tel:${site.phoneHref}`}
-                    className="font-display text-[1.5rem] text-paper transition-colors duration-200 hover:text-safelight sm:text-[1.75rem]"
+                    className="font-display text-[1.5rem] text-paper transition-colors duration-200 hover:text-gold sm:text-[1.75rem]"
                   >
                     {site.phone}
                   </a>
@@ -250,7 +258,7 @@ export function Contact() {
                     href={site.instagram}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-2.5 font-display text-[1.5rem] text-paper transition-colors duration-200 hover:text-safelight sm:text-[1.75rem]"
+                    className="inline-flex items-center gap-2.5 font-display text-[1.5rem] text-paper transition-colors duration-200 hover:text-gold sm:text-[1.75rem]"
                   >
                     <InstagramLogoIcon size={22} weight="light" />
                     {site.instagramHandle}
@@ -258,7 +266,10 @@ export function Contact() {
                 </dd>
               </div>
 
-              <div className="border-t border-rule-soft pt-9">
+              {/* The one gold mark in this section: it separates how to reach
+                  him from where he works, and keeps the closing panel from
+                  going entirely monochrome. */}
+              <div className="border-t border-rule-gold pt-9">
                 <dt className="text-[0.6875rem] uppercase tracking-[0.24em] text-paper-faint">
                   Where I shoot
                 </dt>
@@ -313,7 +324,7 @@ function Field({
 function FieldError({ id, message }: { id: string; message?: string }) {
   if (!message) return null;
   return (
-    <p id={id} className="text-xs leading-relaxed text-safelight">
+    <p id={id} className="text-xs leading-relaxed text-alert">
       {message}
     </p>
   );

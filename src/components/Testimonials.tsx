@@ -93,7 +93,7 @@ export function Testimonials() {
               <span
                 className={[
                   "block h-px w-full transition-colors duration-300",
-                  i === index ? "bg-safelight" : "bg-rule group-hover:bg-paper-faint",
+                  i === index ? "bg-gold" : "bg-rule group-hover:bg-paper-faint",
                 ].join(" ")}
               />
             </button>

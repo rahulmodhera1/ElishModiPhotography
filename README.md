@@ -64,9 +64,20 @@ in `public/images/README.md`.
 - **The theme is locked dark.** Not a missing light mode. Photography reads
   against a near-black ground, so no section inverts. Tokens are in
   `src/app/globals.css`.
-- **One accent, one radius.** The accent is a darkroom amber (`--color-safelight`)
-  used for focus rings, active filters and hairlines. Corners are square
-  everywhere, with the single exception of the round lightbox controls.
+- **Black, white, gold, and nothing else.** The accent is an antique champagne
+  gold (`--color-gold`), deliberately not a saturated metallic yellow. It is
+  rationed to small marks: eyebrows, prices, hairlines, active filters, focus
+  rings, the secondary CTA outline, the lightbox counter. **Do not give it
+  area.** The moment gold fills a panel it stops being an accent and becomes a
+  colour scheme, which is the difference between expensive and costume.
+- **`--color-alert` is not a second accent.** It is a functional state colour
+  for form validation only. Gold cannot carry an error, because nobody reads
+  gold as "something went wrong".
+- **One radius.** Corners are square everywhere, with the single exception of
+  the round lightbox controls.
+- **Contrast is measured, not eyeballed.** Against the ink ground: paper 17.99,
+  paper-dim 8.22, paper-faint 5.59, gold 8.79, alert 6.59. All clear WCAG AA
+  for body text. If you change a token, re-check it before shipping.
 - **Type is Bodoni Moda over Geist.** The didone carries headlines and prices
   only. Body copy is never set in the serif.
 - **Motion respects `prefers-reduced-motion`,** through `useSafeReducedMotion()`

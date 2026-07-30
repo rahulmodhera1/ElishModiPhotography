@@ -44,7 +44,7 @@ export function About() {
           </div>
 
           <Reveal delay={0.18}>
-            <blockquote className="mt-12 border-l border-safelight pl-6">
+            <blockquote className="mt-12 border-l border-gold pl-6">
               <p className="max-w-[40ch] font-display text-[1.4rem] leading-[1.4] text-paper sm:text-[1.6rem]">
                 {about.pullQuote}
               </p>
