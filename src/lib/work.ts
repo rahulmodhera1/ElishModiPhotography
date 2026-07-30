@@ -100,6 +100,19 @@ export function formatPrice(price: number, unit: "fixed" | "guest") {
   return `$${price} CAD ${unit === "guest" ? "per guest" : "fixed price"}`;
 }
 
+/**
+ * How the six offerings split across the two pricing tabs.
+ *
+ * The split is people versus objects and places, which is the one grouping
+ * that is true of the work itself rather than invented to fill a second tab:
+ * a baby session and a portrait session are the same kind of booking in a way
+ * neither is like a car or a landscape commission.
+ */
+export const pricingGroups = [
+  { id: "people" as const, label: "Portraits & Family", categories: ["baby", "child", "family", "portraits"] },
+  { id: "places" as const, label: "Vehicle & Landscape", categories: ["vehicle", "landscape"] },
+] satisfies { id: string; label: string; categories: CategoryId[] }[];
+
 export type Photo = {
   src: string;
   category: CategoryId;

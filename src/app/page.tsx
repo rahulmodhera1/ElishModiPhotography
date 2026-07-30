@@ -4,7 +4,7 @@ import { Footer } from "@/components/Footer";
 import { Hero } from "@/components/Hero";
 import { Nav } from "@/components/Nav";
 import { Portfolio } from "@/components/Portfolio";
-import { PricingNote } from "@/components/PricingNote";
+import { Pricing } from "@/components/Pricing";
 import { Testimonials } from "@/components/Testimonials";
 
 /**
@@ -12,10 +12,10 @@ import { Testimonials } from "@/components/Testimonials";
  * is what keeps the page from settling into a template rhythm:
  *
  *   Hero          full bleed image, type overlaid
- *   About         asymmetric split, portrait low and left
+ *   About         asymmetric split, portrait aligned with the opening line
  *   Offerings     6 cell grid, image with title, description and price beneath
  *   Work          6 column editorial bed, bare images at mixed spans
- *   PricingNote   two column statement, 5/7
+ *   Pricing       tabbed rate card, dotted leader connecting name to price
  *   Testimonials  single large quote, one at a time
  *   Contact       form and details, 7/5
  *
@@ -32,7 +32,7 @@ export default function Home() {
         <Hero />
         <About />
         <Portfolio />
-        <PricingNote />
+        <Pricing />
         <Testimonials />
         <Contact />
       </main>

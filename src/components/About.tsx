@@ -3,8 +3,9 @@ import { about } from "@/lib/site";
 import { Reveal, RevealImage } from "./Reveal";
 
 /**
- * Asymmetric split. The portrait takes five columns and sits slightly low, so
- * the eye lands on the sentence first and the face second.
+ * Asymmetric split. The portrait takes five columns; both columns share the
+ * same top edge, so the face and the headline land in the same glance instead
+ * of the portrait trailing in a beat late.
  *
  * No eyebrow here. The section's position on the page already says what it is,
  * and the eyebrow budget for this page is spent on the hero and the portfolio.
@@ -12,8 +13,8 @@ import { Reveal, RevealImage } from "./Reveal";
 export function About() {
   return (
     <section id="about" className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 sm:py-32 lg:py-40">
-      <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
-        <RevealImage className="lg:col-span-5 lg:mt-16">
+      <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-start lg:gap-16">
+        <RevealImage className="lg:col-span-5">
           <div className="relative aspect-[4/5] w-full overflow-hidden bg-ink-raised">
             <Image
               src="/images/about/portrait.jpg"
