@@ -81,8 +81,12 @@ export function Contact() {
       <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
         <Reveal>
           <h2 className="max-w-[16ch] font-display text-[2.4rem] leading-[1.08] tracking-[-0.015em] text-paper sm:text-[3.25rem] lg:text-[4rem]">
-            Get in touch.
+            Let&rsquo;s plan your session.
           </h2>
+          <p className="mt-5 max-w-[50ch] text-[0.9375rem] leading-relaxed text-paper-dim">
+            Tell me a little about what you have in mind, and I will follow up within
+            two business days.
+          </p>
         </Reveal>
 
         <div className="mt-14 grid grid-cols-1 gap-14 lg:grid-cols-12 lg:gap-20">
@@ -96,11 +100,11 @@ export function Contact() {
                 role="status"
               >
                 <p className="font-display text-[1.75rem] leading-tight text-paper">
-                  That came through.
+                  Message received.
                 </p>
                 <p className="mt-4 max-w-[44ch] text-[0.9375rem] leading-relaxed text-paper-dim">
-                  I read everything myself and usually reply within two working days. If
-                  the date is tight, call and I will pick up.
+                  I personally review every inquiry and will respond within two business
+                  days. For time-sensitive requests, please call directly.
                 </p>
                 <button
                   type="button"
@@ -142,7 +146,7 @@ export function Contact() {
                       htmlFor="shootType"
                       className="text-[0.6875rem] uppercase tracking-[0.24em] text-paper-dim"
                     >
-                      Shoot type
+                      Session type
                     </label>
                     <select
                       id="shootType"
@@ -176,7 +180,7 @@ export function Contact() {
                     </label>
                     <input id="date" name="date" type="date" className={field} />
                     <p className="text-xs text-paper-faint">
-                      A rough window is fine if nothing is fixed yet.
+                      An approximate date is fine if your plans are not yet confirmed.
                     </p>
                   </div>
                 </div>
@@ -194,7 +198,7 @@ export function Contact() {
                     rows={5}
                     aria-invalid={Boolean(errors.message)}
                     aria-describedby={errors.message ? "message-error" : undefined}
-                    placeholder="Where it is, roughly when, and what you want the pictures for."
+                    placeholder="Tell me about your vision, location, and preferred date."
                     className={`${field} resize-y`}
                   />
                   <FieldError id="message-error" message={errors.message} />
@@ -202,7 +206,8 @@ export function Contact() {
 
                 {status === "failed" ? (
                   <p role="alert" className="border border-alert/50 px-4 py-3 text-sm text-paper">
-                    That did not send. Try again, or write to{" "}
+                    Something went wrong and your message was not sent. Please try again,
+                    or email me directly at{" "}
                     <a href={`mailto:${site.email}`} className="text-alert underline underline-offset-4">
                       {site.email}
                     </a>
@@ -271,7 +276,7 @@ export function Contact() {
                   going entirely monochrome. */}
               <div className="border-t border-rule-gold pt-9">
                 <dt className="text-[0.6875rem] uppercase tracking-[0.24em] text-paper-faint">
-                  Where I shoot
+                  Service area
                 </dt>
                 <dd className="mt-2.5 max-w-[34ch] text-[0.9375rem] leading-relaxed text-paper-dim">
                   {site.serviceArea}.

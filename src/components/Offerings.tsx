@@ -46,7 +46,7 @@ export function Offerings({ onSelect }: { onSelect: (id: CategoryId) => void }) 
         <p className="eyebrow">Services</p>
 
         <h2 className="mt-6 max-w-[20ch] font-display text-[2.1rem] leading-[1.1] tracking-[-0.01em] text-paper sm:text-[2.75rem]">
-          What I photograph.
+          Portrait, family &amp; specialty sessions.
         </h2>
 
         <div className="mt-12 grid grid-cols-1 gap-x-5 gap-y-12 lg:grid-cols-12 lg:gap-y-16">

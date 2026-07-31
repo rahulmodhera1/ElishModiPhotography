@@ -37,7 +37,7 @@ export async function POST(request: Request) {
   try {
     body = await request.json();
   } catch {
-    return NextResponse.json({ error: "Could not read that submission." }, { status: 400 });
+    return NextResponse.json({ error: "Something went wrong. Please try again." }, { status: 400 });
   }
 
   if (str(body.website)) {
@@ -54,15 +54,16 @@ export async function POST(request: Request) {
   };
 
   const errors: Record<string, string> = {};
-  if (!data.name) errors.name = "Please add your name.";
+  if (!data.name) errors.name = "Please enter your name.";
   if (!data.email) {
-    errors.email = "Please add an email so I can write back.";
+    errors.email = "Please enter your email address.";
   } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(data.email)) {
-    errors.email = "That email address does not look right.";
+    errors.email = "Please enter a valid email address.";
   }
-  if (!data.shootType) errors.shootType = "Pick the closest kind of shoot.";
+  if (!data.shootType) errors.shootType = "Please select a session type.";
   if (data.message.length < 10) {
-    errors.message = "A sentence or two about the shoot helps me quote it.";
+    errors.message =
+      "Please include a few details about your session so I can prepare an accurate response.";
   }
 
   if (Object.keys(errors).length > 0) {

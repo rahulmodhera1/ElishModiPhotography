@@ -132,7 +132,7 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.24, ease: EASE }}
         >
-          Photographs that still look like you.
+          Portraits made to last a lifetime.
         </motion.h1>
 
         <motion.p
@@ -141,8 +141,8 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.34, ease: EASE }}
         >
-          Babies, children, families and portraits, made slowly and in daylight where
-          possible, for people who would rather not perform.
+          Specializing in newborn, child, family, and portrait photography, thoughtfully
+          composed with natural light throughout Toronto and the GTA.
         </motion.p>
 
         <motion.div

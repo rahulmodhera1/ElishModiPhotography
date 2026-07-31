@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     template: `%s | ${site.name}`,
   },
   description:
-    "Baby, child, family and portrait photography by Elish Modi, plus vehicle and landscape commissions. Unhurried sessions in Toronto and across Ontario.",
+    "Portrait, family, and newborn photography by Elish Modi. Serving Toronto and the greater GTA with a natural, refined approach to every session.",
   keywords: [
     "Toronto family photographer",
     "newborn photographer Toronto",
@@ -52,13 +52,13 @@ export const metadata: Metadata = {
     siteName: site.name,
     title: `${site.name} | ${site.discipline}`,
     description:
-      "Family, portrait and newborn photography, made unhurried. Toronto and across Ontario.",
+      "Portrait, family, and newborn photography based in Toronto, Ontario.",
     images: [{ url: "/images/og/og-image.jpg", width: 1200, height: 630, alt: site.name }],
   },
   twitter: {
     card: "summary_large_image",
     title: `${site.name} | ${site.discipline}`,
-    description: "Family, portrait and newborn photography, made unhurried.",
+    description: "Portrait, family, and newborn photography based in Toronto, Ontario.",
     images: ["/images/og/og-image.jpg"],
   },
 };

@@ -8,7 +8,7 @@ import { Reveal, RevealImage } from "./Reveal";
  * of the portrait trailing in a beat late.
  *
  * No eyebrow here. The heading already names the section, so an "About" label
- * above an "About me." headline would only say it twice.
+ * above an "About Elish Modi." headline would only say it twice.
  */
 export function About() {
   return (

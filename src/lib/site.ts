@@ -12,7 +12,7 @@ export const site = {
   /* PLACEHOLDER: swap for the real base city and service radius. Prices are
      quoted in CAD throughout, so the base is assumed to be Canada. */
   city: "Toronto",
-  serviceArea: "Toronto and the GTA, available across Ontario and for travel",
+  serviceArea: "Toronto and the GTA, with availability across Ontario and for travel",
   discipline: "Portrait & Family Photographer",
 
   /* PLACEHOLDER contact details. Replace all three before the site goes live. */
@@ -36,16 +36,17 @@ export const nav = [
   { label: "Contact", href: "#contact" },
 ] as const;
 
-/* PLACEHOLDER bio. First person, warm, unhurried. Rewrite in Elish's voice. */
+/* PLACEHOLDER bio. First person, confident, professional. Rewrite in Elish's voice. */
 export const about = {
-  heading: "About me.",
+  heading: "About Elish Modi.",
   body: [
-    "I started shooting on a borrowed film body in my last year of school and never really put it down. Years later I still work slowly, still shoot a roll or two alongside the digital, and still think the best frame usually arrives after the one everybody expected.",
-    "Most of my work is people: newborns, kids who will not sit still, whole families, and portraits for anyone who would rather not perform. I also shoot cars and landscapes, usually for someone who wants one great print of something they love.",
-    "Sessions run unhurried on purpose. We talk first, we walk, and somewhere in there you forget the camera is out. That is the frame I am waiting for.",
+    "I'm a Toronto-based portrait and family photographer dedicated to creating natural, refined imagery for clients across the GTA and beyond.",
+    "My approach favors soft natural light and genuine expression over rigid posing. The result is a collection of images that feel authentic to who you are, not performed for the camera.",
+    "Every session begins with a conversation about what matters most to you, and ends with a carefully edited gallery designed to be treasured for years to come.",
+    "Beyond portrait and family sessions, I also photograph vehicles and landscapes for clients seeking one exceptional print of something they love.",
   ],
   pullQuote:
-    "A portrait is not a pose you hold. It is the half second right after you stop holding it.",
+    "A great portrait is never a pose you hold. It is the moment just after you let it go.",
   specialties: ["Babies", "Children", "Families", "Portraits", "Vehicles", "Landscapes"],
 } as const;
 
@@ -86,8 +87,8 @@ export const testimonials = [
  * actually included and what travel costs before launch.
  */
 export const pricingNotes = {
-  heading: "Pricing.",
-  body: "Every session includes the shoot itself, a hand-graded gallery of finished frames, and files sized for both print and web. Per-guest pricing counts everyone being photographed. Travel beyond the GTA and any rush delivery get quoted before we book.",
+  heading: "Session investment.",
+  body: "Every session includes a personal consultation, a professionally edited gallery, and high-resolution files ready for both print and web. Per-guest pricing includes everyone being photographed. Travel outside the GTA and rush delivery are quoted individually before booking.",
 } as const;
 
 /* Mirrors the six offerings, plus an escape hatch for anything unlisted. */

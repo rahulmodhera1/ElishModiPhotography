@@ -15,7 +15,8 @@ import { Testimonials } from "@/components/Testimonials";
  *   About         asymmetric split, portrait aligned with the opening line
  *   Offerings     6 cell grid, image with title, description and price beneath
  *   Work          6 column editorial bed, bare images at mixed spans
- *   Pricing       tabbed rate card, dotted leader connecting name to price
+ *   Pricing       asymmetric split, 4/8, a bordered rate card with a segmented
+ *                 switcher and a photograph beside every line
  *   Testimonials  single large quote, one at a time
  *   Contact       form and details, 7/5
  *

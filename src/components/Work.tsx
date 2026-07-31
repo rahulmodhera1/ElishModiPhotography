@@ -55,7 +55,7 @@ export function Work({
 
         <div className="mt-6 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <h2 className="max-w-[16ch] font-display text-[2.1rem] leading-[1.1] tracking-[-0.01em] text-paper sm:text-[2.75rem]">
-            Selected work.
+            A selection of recent sessions.
           </h2>
 
           {/*
@@ -129,17 +129,17 @@ export function Work({
             from a category, which is exactly when a blank grid is confusing. */}
         {visible.length === 0 ? (
           <div className="mt-12 border border-rule-soft px-6 py-20 text-center">
-            <p className="font-display text-2xl text-paper">Nothing filed here yet.</p>
+            <p className="font-display text-2xl text-paper">No sessions in this category yet.</p>
             <p className="mx-auto mt-3 max-w-[42ch] text-sm leading-relaxed text-paper-dim">
-              This part of the archive is still being scanned. Try another category, or
-              ask and I will send recent work directly.
+              This selection will be updated soon. Browse another category below, or get
+              in touch for recent examples.
             </p>
             <button
               type="button"
               onClick={() => onFilterChange("all")}
               className="motion-safe-transform mt-7 text-[0.75rem] uppercase tracking-[0.2em] text-gold duration-[140ms] active:scale-[0.98]"
             >
-              Show everything
+              View all work
             </button>
           </div>
         ) : null}
