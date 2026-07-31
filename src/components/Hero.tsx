@@ -51,6 +51,22 @@ export function Hero() {
         className="absolute inset-0 z-0"
         style={reduce ? undefined : { transform }}
       >
+        {/*
+          Two different crops, because a phone and a monitor are not looking
+          at the same picture.
+
+          Wide: anchored to the bottom. Where the window is shorter than 1:2
+          there is vertical overflow to spend, and spending it off the top
+          lifts the boats further up the frame and hands the extra water to
+          the copy underneath. On windows near the photograph's own 2:1 there
+          is nothing to crop and the value is simply inert.
+
+          Narrow: a phone only ever shows about a quarter of this frame's
+          width, so the choice is which quarter. Anchoring left lands on the
+          wake and the runabout and leaves the sailboat off the right edge
+          entirely, which is both the stronger vertical composition and the
+          one whose subject sits highest, so the copy clears it.
+        */}
         <Image
           src="/images/hero/hero.jpg"
           alt="An aerial view of a small boat carving a wake toward an anchored sailboat, in monochrome"
@@ -58,7 +74,7 @@ export function Hero() {
           priority
           quality={90}
           sizes="100vw"
-          className="object-cover"
+          className="object-cover object-[22%_50%] sm:object-[50%_100%]"
         />
       </motion.div>
 
@@ -84,17 +100,19 @@ export function Hero() {
       />
 
       {/*
-        Centered horizontally, and pushed up off the bottom edge rather than
-        pinned flush to it. The boats and their wake occupy roughly the top
-        two thirds of this photograph, so the copy sits in the band below
-        them; the mb reserves a real strip of clear water beneath the copy
-        instead of letting it run to the very bottom of the viewport, which
-        is the part of the frame most worth leaving alone. mt-auto plus a
-        dvh-based mb (rather than a fixed rem one) keeps that bottom strip
-        proportional to the viewport instead of eating the whole thing on a
-        short window.
+        Centered horizontally, and sitting in the band of open water the
+        crop opens up below the boats. mt-auto pushes the block down; the mb
+        reserves a strip of clear water underneath it so the copy is framed
+        by the photograph rather than parked on its bottom edge.
+
+        The mb is in dvh, not rem, so that strip stays proportional: on a
+        short window a fixed margin would claim the same pixels the copy
+        needs to stay clear of the boats, which is the failure this whole
+        section is tuned against. It is clamped at both ends so it cannot
+        collapse to nothing on a very short window or run away on a very
+        tall one.
       */}
-      <div className="relative z-10 mx-auto mt-auto mb-[13dvh] flex w-fit max-w-[calc(100%-2.5rem)] flex-col items-center px-5 text-center sm:mb-[15dvh] sm:max-w-[calc(100%-4rem)] sm:px-8">
+      <div className="relative z-10 mx-auto mt-auto mb-[clamp(1.25rem,8dvh,5.5rem)] flex w-fit max-w-[calc(100%-2.5rem)] flex-col items-center px-5 text-center sm:max-w-[calc(100%-4rem)] sm:px-8">
         {/*
           The glow. w-fit on the wrapper above is what makes this hug the
           actual text, not the full 1400px content column: the widest line
@@ -137,8 +155,26 @@ export function Hero() {
           {site.city} &middot; {site.discipline}
         </motion.p>
 
+        {/*
+          Fluid, and keyed to viewport HEIGHT as much as width, which is the
+          unusual part and the necessary one. Breakpoint type sizes only know
+          how wide the window is, so a headline tuned on a 900px-tall laptop
+          stays exactly as tall on a 620px one, where it no longer fits in
+          the water below the boats. Feeding vh into the clamp lets the
+          headline give height back on short windows, which is precisely
+          where the clearance is scarce.
+
+          The min() against vw is the phone guard: on a 390px screen the
+          height-driven value would be far too wide and wrap to three lines,
+          so width wins there and height wins everywhere else.
+
+          The gaps below are fluid for the same reason. A headline that gives
+          height back while the space around it does not just moves the
+          problem: on a 620px window the four fixed margins were worth more
+          than a line of the headline.
+        */}
         <motion.h1
-          className="mt-6 max-w-[16ch] font-display text-[2.6rem] leading-[1.04] tracking-[-0.015em] text-paper sm:text-6xl lg:text-[4.75rem]"
+          className="mt-[clamp(0.65rem,1.8vh,1.25rem)] max-w-[16ch] font-display text-[min(10.5vw,clamp(1.9rem,5.5vh+0.2rem,4.25rem))] leading-[1.05] tracking-[-0.015em] text-paper"
           initial={reduce ? { opacity: 0 } : { opacity: 0, y: 22 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.24, ease: EASE }}
@@ -146,8 +182,11 @@ export function Hero() {
           Portraits made to last a lifetime.
         </motion.h1>
 
+        {/* 56ch, not 46: wide enough that this sets in two lines on a desktop
+            rather than three, which is one fewer line of height competing
+            with the photograph for the same band of water. */}
         <motion.p
-          className="mt-6 max-w-[46ch] text-[0.9375rem] leading-relaxed text-paper-dim sm:text-base"
+          className="mt-[clamp(0.65rem,1.8vh,1.25rem)] max-w-[56ch] text-[0.9rem] leading-relaxed text-paper-dim sm:text-[0.9375rem]"
           initial={reduce ? { opacity: 0 } : { opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.34, ease: EASE }}
@@ -156,8 +195,11 @@ export function Hero() {
           composed with natural light throughout Toronto and the GTA.
         </motion.p>
 
+        {/* Side by side even on a phone. Stacked, these two cost 100px of the
+            clear water; in a row they cost 44px, and at 350px of usable width
+            both still clear a comfortable tap target. */}
         <motion.div
-          className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4"
+          className="mt-[clamp(1rem,3vh,2rem)] flex flex-row flex-wrap items-center justify-center gap-3 sm:gap-4"
           initial={reduce ? { opacity: 0 } : { opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.44, ease: EASE }}

@@ -87,26 +87,44 @@ in `public/images/README.md`.
 ## The hero
 
 `public/images/hero/hero.jpg` is generated, not uploaded. `scripts/grade-hero.mjs`
-reads the full-colour master at `public/images/work/landscape/landscape-02.jpg`
-and grades it to monochrome with a gold split-tone, a darkened sky and a
-vignette. One master, two outputs, no chance of the two drifting.
+reads the full-colour master at `public/images/work/landscape/landscape-04.jpg`
+and grades it to monochrome with a gold split-tone, a gentle top-to-bottom
+grade and a weak vignette. One master, two outputs, no chance of the two
+drifting.
+
+It also crops. `CROP_TOP` takes a quarter off the top of the frame, and that is
+a layout decision rather than a photographic one: uncropped, every subject in
+this picture sits between roughly 28% and 66% of the height, which leaves the
+copy nowhere to go that is not on top of a boat. The crop is what gives the
+type somewhere to live. The portfolio keeps the frame uncropped.
 
 To change the hero, point `SRC` in that script at the new photograph and re-run.
-Expect to retune `TONE_FLOOR` and the gradient stops: the values are fitted to a
-bright sky over grey stone and will not suit a frame with a different tonal
-balance.
+Expect to retune `CROP_TOP` for where the new frame's subject sits, and
+`TONE_FLOOR` and the gradient stops for its tonal balance.
 
-Then check the copy is still readable on it:
+Then run both hero checks. They cover different failures and neither implies
+the other:
 
 ```bash
 npm i -D playwright && npx playwright install chromium
 npm run build && npm start        # in another terminal
 node scripts/check-hero-contrast.mjs
+node scripts/check-hero-clearance.mjs
 ```
 
-It hides the hero copy, screenshots what is behind it, and measures each line
-against the brightest 5% of its own background. It exits non-zero if anything
-drops under 4.5:1. Do not swap the hero photograph without running it.
+`check-hero-contrast.mjs` hides the hero copy, screenshots what is behind it,
+and measures each line against the brightest 5% of its own background. It exits
+non-zero if anything drops under 4.5:1.
+
+`check-hero-clearance.mjs` measures whether the copy still sits clear of the
+boats. The crop and the copy block size themselves against the viewport by
+completely unrelated rules — `object-cover` against aspect ratio, the type
+against `vh` — so "the text is below the boats" holds at the window you looked
+at and silently breaks at the next one. It broke twice that way, both times
+invisible at 1440x900. The script detects the subject band from the graded file
+rather than hardcoding it, so re-cropping cannot leave a stale number behind.
+
+Do not swap the hero photograph without running both.
 
 The hero is graded because it is the page's background, not a portfolio piece.
 **Portfolio photographs are never colour-treated** — those are the work, and
