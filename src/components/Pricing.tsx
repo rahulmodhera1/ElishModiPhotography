@@ -36,7 +36,7 @@ export function Pricing() {
   const rows = offerings.filter((o) => (group.categories as string[]).includes(o.id));
 
   return (
-    <section id="pricing" className="border-t border-rule-soft py-24 sm:py-32">
+    <section id="pricing" className="border-t border-rule-soft py-20 sm:py-24 lg:py-28">
       <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
         <Reveal>
           <h2 className="max-w-[16ch] font-display text-[2.1rem] leading-[1.1] tracking-[-0.01em] text-paper sm:text-[2.75rem]">

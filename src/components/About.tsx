@@ -7,12 +7,12 @@ import { Reveal, RevealImage } from "./Reveal";
  * same top edge, so the face and the headline land in the same glance instead
  * of the portrait trailing in a beat late.
  *
- * No eyebrow here. The section's position on the page already says what it is,
- * and the eyebrow budget for this page is spent on the hero and the portfolio.
+ * No eyebrow here. The heading already names the section, so an "About" label
+ * above an "About me." headline would only say it twice.
  */
 export function About() {
   return (
-    <section id="about" className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 sm:py-32 lg:py-40">
+    <section id="about" className="mx-auto max-w-[1400px] px-5 py-20 sm:px-8 sm:py-24 lg:py-28">
       <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-start lg:gap-16">
         <RevealImage className="lg:col-span-5">
           <div className="relative aspect-[4/5] w-full overflow-hidden bg-ink-raised">

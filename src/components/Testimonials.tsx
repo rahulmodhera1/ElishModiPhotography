@@ -44,7 +44,7 @@ export function Testimonials() {
 
   return (
     <section
-      className="border-t border-rule-soft py-24 sm:py-32"
+      className="border-t border-rule-soft py-20 sm:py-24 lg:py-28"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocusCapture={() => setPaused(true)}

@@ -38,7 +38,7 @@ export const nav = [
 
 /* PLACEHOLDER bio. First person, warm, unhurried. Rewrite in Elish's voice. */
 export const about = {
-  heading: "I photograph people the way they actually are.",
+  heading: "About me.",
   body: [
     "I started shooting on a borrowed film body in my last year of school and never really put it down. Years later I still work slowly, still shoot a roll or two alongside the digital, and still think the best frame usually arrives after the one everybody expected.",
     "Most of my work is people: newborns, kids who will not sit still, whole families, and portraits for anyone who would rather not perform. I also shoot cars and landscapes, usually for someone who wants one great print of something they love.",
@@ -86,7 +86,7 @@ export const testimonials = [
  * actually included and what travel costs before launch.
  */
 export const pricingNotes = {
-  heading: "What the price covers.",
+  heading: "Pricing.",
   body: "Every session includes the shoot itself, a hand-graded gallery of finished frames, and files sized for both print and web. Per-guest pricing counts everyone being photographed. Travel beyond the GTA and any rush delivery get quoted before we book.",
 } as const;
 
