@@ -45,7 +45,7 @@ export function Hero() {
         photograph disappears entirely. Everything in this section is at zero
         or above.
       */
-      className="relative isolate flex min-h-[100dvh] flex-col justify-end overflow-hidden"
+      className="relative isolate flex min-h-[100dvh] flex-col overflow-hidden"
     >
       <motion.div
         className="absolute inset-0 z-0"
@@ -63,70 +63,58 @@ export function Hero() {
       </motion.div>
 
       {/*
-        Two scrims.
+        The full-bleed pedestal that used to sit here darkened a band all
+        the way to the bottom edge of the viewport, which flattened the one
+        part of this photograph, the open water below the boats, that the
+        text doesn't need any help from. What replaces it is a single glow
+        sized to the copy block itself (see the div just inside the content
+        wrapper below): dark directly behind the type, fading out within a
+        short distance on every side, so the water stays visibly water
+        right up to the bottom of the frame instead of running into a dark
+        band.
 
-        The pedestal is the one doing the real work, and it is sized in rem,
-        not percent. A percentage-height gradient looked right at 900px tall
-        and broke on a short, wide laptop window: the copy block is a fixed
-        stack of rem-sized type, so on a shorter viewport it eats a bigger
-        share of the box and its top edge lands higher up, past the strong
-        part of a percentage gradient, over whatever the photograph happens to
-        be doing there. That is what read as the headline "floating" with
-        nothing under it, and it changed from device to device because it was
-        tracking the wrong dimension.
-
-        Sizing the dark band in rem instead ties it to the text stack's real
-        height at each breakpoint rather than to the viewport's, so the same
-        physical amount of image is darkened behind the copy everywhere, and
-        the crop above it is free to vary without ever exposing the text.
-
-        The gradient stops inside the pedestal are deliberately skewed, not
-        the usual even 0/50/100 split: opacity holds at 85% out to 75% of the
-        pedestal's own height and only fades in the last quarter. The eyebrow
-        is the topmost line, so it is always the one closest to the fade edge
-        and the one measured worst. An even midpoint gradient meant the
-        pedestal had to be taller than the whole text stack just to keep the
-        eyebrow out of the fade, which is exactly the miscalculation that
-        shipped once already at 2-3:1. Pushing most of the pedestal to a flat,
-        near-maximum opacity makes it forgiving of being slightly short rather
-        than needing to be exactly right.
-
-        None of this is eyeballed. scripts/check-hero-contrast.mjs measures
-        the brightest 5% of pixels behind each line at five viewport shapes,
-        including short, wide ones a "desktop" and a "mobile" preset both
-        miss, and this pedestal is sized against that script, not a
-        screenshot. Re-run it after touching any number here.
-
-        The ambient top wash is unchanged: still percentage-based, because
-        nothing rem-sized sits up there for a fixed size to fight.
-
-        There used to be a third, left-weighted horizontal pass here, from
-        when the copy sat pinned to the left edge. Now that the copy is
-        centered, a lopsided full-height wash would darken one side of the
-        photograph for no reason and still leave the other side of the
-        centered text under-covered. The pedestal alone carries the copy;
-        everything above it is left as close to untouched as contrast
-        allows.
+        The ambient top wash stays: a small, cheap way to keep the header's
+        white logotype and nav readable over whatever the top of the crop
+        is doing, and it never competes with the boats since it only
+        reaches 10rem down.
       */}
       <div
         aria-hidden
         className="absolute inset-x-0 top-0 z-0 h-40 bg-gradient-to-b from-ink/50 to-transparent"
       />
-      <div
-        aria-hidden
-        className="absolute inset-x-0 bottom-0 z-0 h-[38rem] bg-gradient-to-t from-ink from-0% via-ink/85 via-75% to-transparent to-100% lg:h-[44rem]"
-      />
 
       {/*
-        Centered rather than pinned to the left edge. The boats and their
-        wake sit in the top two thirds of this photograph and span nearly
-        its full width, so the one part of the frame that stays clear at
-        every crop is the lower band of open water: centering the copy
-        there, instead of anchoring it to the left, keeps it off the
-        subject while still reading as deliberately placed rather than
-        stranded in a corner.
+        Centered horizontally, and pushed up off the bottom edge rather than
+        pinned flush to it. The boats and their wake occupy roughly the top
+        two thirds of this photograph, so the copy sits in the band below
+        them; the mb reserves a real strip of clear water beneath the copy
+        instead of letting it run to the very bottom of the viewport, which
+        is the part of the frame most worth leaving alone. mt-auto plus a
+        dvh-based mb (rather than a fixed rem one) keeps that bottom strip
+        proportional to the viewport instead of eating the whole thing on a
+        short window.
       */}
-      <div className="relative z-10 mx-auto flex w-full max-w-[1400px] flex-col items-center px-5 pb-16 pt-24 text-center sm:px-8 sm:pb-24">
+      <div className="relative z-10 mx-auto mt-auto mb-[13dvh] flex w-fit max-w-[calc(100%-2.5rem)] flex-col items-center px-5 text-center sm:mb-[15dvh] sm:max-w-[calc(100%-4rem)] sm:px-8">
+        {/*
+          The glow. w-fit on the wrapper above is what makes this hug the
+          actual text, not the full 1400px content column: the widest line
+          (the subhead, ~46ch) sets the box width, and the insets add a
+          margin of breathing room around that on every side.
+
+          This is a blurred solid, not a hand-tuned radial gradient. A
+          gradient's falloff is exact math, and exact math still reads as a
+          shape with an edge once it sits over a busy, textured background
+          like open water: the first version of this looked like a rounded
+          rectangle laid over the photograph. blur-[80px] is what actually
+          softens it, the same way a stage light gets softened by a diffuser
+          rather than by dimming it. z-[-1] keeps it under the type but
+          above the photograph, inside this wrapper's own stacking context.
+        */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -inset-x-6 -inset-y-12 z-[-1] rounded-[4rem] bg-ink/95 blur-[70px] sm:-inset-x-10 sm:-inset-y-16 sm:blur-[90px]"
+        />
+
         <motion.p
           /* gold-bright, not gold: this is the only eyebrow that sits on a
              photograph rather than on the page ground. See globals.css. */
