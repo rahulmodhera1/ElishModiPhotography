@@ -33,6 +33,10 @@ export type Scale = "full" | "wide" | "tall" | "half";
  *
  * PLACEHOLDER: the `blurb` lines are written to fit, not dictated by Elish.
  * Prices are real.
+ *
+ * `width` and `height` are the file's real pixel dimensions. Below lg the card
+ * is drawn at that ratio so the frame is not cropped on a phone, so swapping
+ * an image means updating these two numbers with it.
  */
 export const offerings = [
   {
@@ -43,6 +47,8 @@ export const offerings = [
     blurb:
       "Newborn and first-year sessions photographed in the comfort of your own home, using soft, natural light.",
     image: "/images/offerings/baby.jpg",
+    width: 1600,
+    height: 1200,
     alt: "A baby wrapped in a pink blanket, looking straight up at the camera",
   },
   {
@@ -52,6 +58,8 @@ export const offerings = [
     unit: "guest" as const,
     blurb: "Relaxed, unscripted sessions that capture genuine expressions at your child's own pace.",
     image: "/images/offerings/child.jpg",
+    width: 1200,
+    height: 1500,
     alt: "Placeholder: child offering card, young child mid movement",
   },
   {
@@ -62,6 +70,8 @@ export const offerings = [
     blurb:
       "Timeless family portraits that capture both posed moments and the connection between them.",
     image: "/images/offerings/family.jpg",
+    width: 1600,
+    height: 1200,
     alt: "A father carrying his daughter in a chest carrier on a clifftop path",
   },
   {
@@ -72,6 +82,8 @@ export const offerings = [
     blurb:
       "Professional headshots and personal portraits designed to look natural, polished, and true to you.",
     image: "/images/offerings/portraits.jpg",
+    width: 1600,
+    height: 1200,
     alt: "Placeholder: portrait offering card, single subject three quarter turn",
   },
   {
@@ -81,6 +93,8 @@ export const offerings = [
     unit: "fixed" as const,
     blurb: "Automotive photography with clean composition and refined lighting, for images worth printing.",
     image: "/images/offerings/vehicle.jpg",
+    width: 1600,
+    height: 1200,
     alt: "Placeholder: vehicle offering card, car in low evening sun",
   },
   {
@@ -91,6 +105,8 @@ export const offerings = [
     blurb:
       "Commissioned landscape work, scouted and delivered print-ready at large format.",
     image: "/images/offerings/landscape.jpg",
+    width: 1600,
+    height: 1200,
     alt: "The lakeshore at sunset, town and water framed through a narrow gap",
   },
 ];
@@ -304,12 +320,20 @@ export const scaleClass: Record<Scale, string> = {
   half: "sm:col-span-3",
 };
 
-/** Aspect ratio the tile is cropped to, so the grid keeps an editorial rhythm. */
+/**
+ * Aspect ratio the tile is cropped to, so the grid keeps an editorial rhythm.
+ *
+ * sm and up only. These crops exist to make six columns of mixed spans line up
+ * into rows, and below sm there are no columns and no rows: every tile is the
+ * full width of the screen, one under the next. Cropping there would cost
+ * composition and buy nothing, so a phone gets each photograph at its own
+ * ratio instead. See WorkTile.
+ */
 export const scaleAspect: Record<Scale, string> = {
-  full: "aspect-[16/7]",
-  wide: "aspect-[4/3]",
-  tall: "aspect-[4/5]",
-  half: "aspect-[3/2]",
+  full: "sm:aspect-[16/7]",
+  wide: "sm:aspect-[4/3]",
+  tall: "sm:aspect-[4/5]",
+  half: "sm:aspect-[3/2]",
 };
 
 /** Sizes attribute per scale, so the browser never downloads more than it paints. */

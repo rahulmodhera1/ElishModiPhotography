@@ -79,7 +79,7 @@ export function Work({
                   type="button"
                   onClick={() => onFilterChange(item.id)}
                   className={[
-                    "relative shrink-0 whitespace-nowrap pb-2 text-[0.75rem] uppercase tracking-[0.2em] transition-colors duration-200",
+                    "relative shrink-0 whitespace-nowrap pt-3 pb-2 text-[0.75rem] uppercase tracking-[0.2em] transition-colors duration-200",
                     active ? "text-paper" : "text-paper-faint hover:text-paper-dim",
                   ].join(" ")}
                 >

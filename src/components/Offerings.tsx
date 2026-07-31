@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import type { CSSProperties } from "react";
 import { ArrowUpRightIcon } from "@phosphor-icons/react/dist/ssr";
 import { formatPrice, offerings, type CategoryId } from "@/lib/work";
 import { RevealImage } from "./Reveal";
@@ -34,10 +35,16 @@ const spans = [
   underneath start on the same line. Driving the crop from aspect ratio instead
   looks tidy in isolation but leaves a well of dead space under whichever cell
   came out shorter, which is the gap that makes a grid look accidental. The
-  asymmetry comes from the column spans alone. Below lg it is one column and
-  the aspect ratio takes over again.
+  asymmetry comes from the column spans alone.
+
+  Below lg there are no rows to align, so nothing is bought by forcing a shape.
+  The cell takes each photograph's own ratio, set per card from the manifest
+  dimensions. A fixed 3:2 here was cropping the 4:3 frames top and bottom and
+  cutting the one portrait frame nearly in half, on the narrow screens least
+  able to spare the composition.
 */
-const IMAGE_BOX = "aspect-[3/2] lg:aspect-auto lg:h-[26rem] xl:h-[30rem]";
+const IMAGE_BOX =
+  "aspect-[var(--card-ratio)] lg:aspect-auto lg:h-[26rem] xl:h-[30rem]";
 
 export function Offerings({ onSelect }: { onSelect: (id: CategoryId) => void }) {
   return (
@@ -57,7 +64,12 @@ export function Offerings({ onSelect }: { onSelect: (id: CategoryId) => void }) 
                 onClick={() => onSelect(item.id)}
                 className="group block w-full text-left"
               >
-                <div className={`relative w-full overflow-hidden bg-ink-raised ${IMAGE_BOX}`}>
+                <div
+                  className={`relative w-full overflow-hidden bg-ink-raised ${IMAGE_BOX}`}
+                  style={
+                    { "--card-ratio": `${item.width} / ${item.height}` } as CSSProperties
+                  }
+                >
                   <Image
                     src={item.image}
                     alt={item.alt}

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
-import { useRef, type PointerEvent } from "react";
+import { useRef, type CSSProperties, type PointerEvent } from "react";
 import type { Photo } from "@/lib/work";
 
 /**
@@ -77,7 +77,26 @@ export function WorkTile({
       aria-label={`Open image ${index + 1}: ${photo.alt}`}
       className="group relative block h-full w-full cursor-pointer overflow-hidden bg-ink-raised"
     >
-      <div className={`relative h-full w-full ${aspect}`}>
+      {/*
+        Below sm there is no six column bed to keep in rhythm, so there is
+        nothing for the slot crop to buy: it just cuts a frame down. A "full"
+        slot is 16:7, and putting a 3:2 photograph in one at 390px wide throws
+        away half its height for a rhythm that only exists on wide screens.
+
+        So the tile takes the photograph's own ratio on a phone and the slot's
+        ratio from sm up. The variable is set per photo from the manifest
+        dimensions, which every entry already carries.
+
+        h-full sits alongside it rather than against it, for the row-stretch
+        reason described above. Below sm the grid is one column, so the row's
+        height is whatever this box's ratio makes it and h-full resolves to
+        exactly that; the two only interact from sm up, where a slot ratio is
+        in play and a taller row-mate is possible.
+      */}
+      <div
+        className={`relative h-full w-full aspect-[var(--tile-ratio)] ${aspect}`}
+        style={{ "--tile-ratio": `${photo.width} / ${photo.height}` } as CSSProperties}
+      >
         <Image
           src={photo.src}
           alt={photo.alt}
