@@ -119,29 +119,42 @@ export function Hero() {
           (the subhead, ~46ch) sets the box width, and the insets add a
           margin of breathing room around that on every side.
 
-          This is a blurred solid, not a hand-tuned radial gradient. A
-          gradient's falloff is exact math, and exact math still reads as a
-          shape with an edge once it sits over a busy, textured background
-          like open water: the first version of this looked like a rounded
-          rectangle laid over the photograph. The blur is what actually
-          softens it, the same way a stage light gets softened by a diffuser
-          rather than by dimming it. z-[-1] keeps it under the type but
-          above the photograph, inside this wrapper's own stacking context.
+          It's two blurred shapes stacked, not one, and not a hand-tuned
+          radial gradient. A gradient's falloff is exact math, and exact
+          math still reads as a shape with an edge once it sits over a
+          busy, textured background like open water. A single solid blurred
+          shape was the version before this one, and at full opacity with a
+          moderate blur it had the same problem from the other direction:
+          the centre stayed flat, fully opaque black, so it read as a
+          rounded rectangle laid over the photograph rather than a shadow
+          the copy was sitting in. Nothing in between the two failure modes
+          exists at a single opacity and a single blur radius.
 
-          The top and bottom reach are deliberately different, not the
-          symmetric box the first version used. The wake crosses close
-          behind the eyebrow, the topmost line, so a big symmetric blur
-          bled up into it and started dimming the wake itself, exactly the
-          "taking away from the photo" this exists to avoid. Below the copy
-          is open water with nothing to protect, so that side can carry
-          more reach without cost. Pulling the top in and reducing the
-          blur radius keeps the glow from climbing into the wake; the
-          smaller top margin is made up in contrast by the box's own
-          opacity rather than by spread.
+          The fix is to split the job. The core, directly behind the text,
+          is smaller, tightly blurred and holds most of the opacity: that
+          is what actually delivers the contrast. The halo around it is
+          bigger, far more blurred, and much lower opacity: it has almost
+          nothing to say about contrast and everything to say about not
+          having an edge, fading the core into the water gradually enough
+          that the eye never finds a boundary to read as a shape. z-[-1] on
+          both keeps them under the type but above the photograph, inside
+          this wrapper's own stacking context; the core is written second
+          so it paints in front of the halo.
+
+          The top reach on both is deliberately tighter than the sides and
+          bottom. The wake crosses close behind the eyebrow, the topmost
+          line, so a generous top would bleed into it and start dimming the
+          wake itself, exactly the "taking away from the photo" this exists
+          to avoid. Below and beside the copy is open water with nothing to
+          protect, so those sides can carry more reach for free.
         */}
         <div
           aria-hidden
-          className="pointer-events-none absolute -inset-x-6 -top-4 -bottom-14 z-[-1] rounded-[4rem] bg-ink blur-[45px] sm:-inset-x-10 sm:-top-6 sm:-bottom-20 sm:blur-[60px]"
+          className="pointer-events-none absolute -inset-x-14 -top-6 -bottom-24 z-[-1] rounded-[6rem] bg-ink/40 blur-[70px] sm:-inset-x-24 sm:-top-8 sm:-bottom-32 sm:blur-[100px]"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -inset-x-5 -top-3 -bottom-10 z-[-1] rounded-[3rem] bg-ink/75 blur-[30px] sm:-inset-x-8 sm:-top-4 sm:-bottom-14 sm:blur-[38px]"
         />
 
         <motion.p
