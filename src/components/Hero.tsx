@@ -63,22 +63,51 @@ export function Hero() {
       </motion.div>
 
       {/*
-        Two scrims, not one.
+        Three scrims.
 
-        The vertical pass darkens the foot of the frame. On its own it was not
-        enough: measured against the brightest 5% of pixels behind each line,
-        the gold eyebrow fell to 1.92:1 where it crossed sunlit stone, which is
-        a straight legibility failure. The page average looked fine, which is
-        exactly why an average is the wrong test for type over a photograph.
+        The pedestal is the one doing the real work, and it is sized in rem,
+        not percent. A percentage-height gradient looked right at 900px tall
+        and broke on a short, wide laptop window: the copy block is a fixed
+        stack of rem-sized type, so on a shorter viewport it eats a bigger
+        share of the box and its top edge lands higher up, past the strong
+        part of a percentage gradient, over whatever the photograph happens to
+        be doing there. That is what read as the headline "floating" with
+        nothing under it, and it changed from device to device because it was
+        tracking the wrong dimension.
 
-        The horizontal pass fixes it by weighting the darkness to the left,
-        where all the copy lives, and leaving the right side of the frame open
-        so the building is still doing its job. Both are kept generous enough
-        to hold up if this photograph is swapped for a brighter one.
+        Sizing the dark band in rem instead ties it to the text stack's real
+        height at each breakpoint rather than to the viewport's, so the same
+        physical amount of image is darkened behind the copy everywhere, and
+        the crop above it is free to vary without ever exposing the text.
+
+        The gradient stops inside the pedestal are deliberately skewed, not
+        the usual even 0/50/100 split: opacity holds at 85% out to 75% of the
+        pedestal's own height and only fades in the last quarter. The eyebrow
+        is the topmost line, so it is always the one closest to the fade edge
+        and the one measured worst. An even midpoint gradient meant the
+        pedestal had to be taller than the whole text stack just to keep the
+        eyebrow out of the fade, which is exactly the miscalculation that
+        shipped once already at 2-3:1. Pushing most of the pedestal to a flat,
+        near-maximum opacity makes it forgiving of being slightly short rather
+        than needing to be exactly right.
+
+        None of this is eyeballed. scripts/check-hero-contrast.mjs measures
+        the brightest 5% of pixels behind each line at five viewport shapes,
+        including short, wide ones a "desktop" and a "mobile" preset both
+        miss, and this pedestal is sized against that script, not a
+        screenshot. Re-run it after touching any number here.
+
+        The ambient top wash and the left-weighted horizontal pass are
+        unchanged: still percentage-based, because nothing rem-sized sits up
+        there for a fixed size to fight.
       */}
       <div
         aria-hidden
-        className="absolute inset-0 z-0 bg-gradient-to-t from-ink via-ink/55 to-ink/15"
+        className="absolute inset-x-0 top-0 z-0 h-40 bg-gradient-to-b from-ink/50 to-transparent"
+      />
+      <div
+        aria-hidden
+        className="absolute inset-x-0 bottom-0 z-0 h-[38rem] bg-gradient-to-t from-ink from-0% via-ink/85 via-75% to-transparent to-100% lg:h-[44rem]"
       />
       <div
         aria-hidden

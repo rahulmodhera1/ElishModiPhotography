@@ -54,9 +54,21 @@ const FOREGROUND = {
   subhead: "#a8a7a3", // paper-dim
 };
 
+/*
+  Deliberately includes short, wide shapes, not just a "desktop" and a
+  "mobile" size. The bug this script exists to catch shipped once already
+  because 1440x900 and 390x844 are both tall enough that a percentage-height
+  scrim looks fine on them; it only broke on a short laptop window, where the
+  fixed-size text stack eats a bigger share of the box and pushes past the
+  gradient's strong region. Any future scrim change needs to survive the short
+  end of this list, not just the tall end.
+*/
 const VIEWPORTS = [
   ["desktop", 1440, 900],
   ["mobile", 390, 844],
+  ["laptop-short", 1440, 758],
+  ["laptop-zoomed", 1280, 620],
+  ["ultrawide", 2560, 1080],
 ];
 
 /* CHROMIUM_PATH lets CI or a sandbox point at a browser it already has,
