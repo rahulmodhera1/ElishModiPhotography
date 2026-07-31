@@ -77,11 +77,11 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="border-t border-rule-soft py-24 sm:py-32">
+    <section id="contact" className="border-t border-rule-soft py-20 sm:py-24 lg:py-28">
       <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
         <Reveal>
           <h2 className="max-w-[16ch] font-display text-[2.4rem] leading-[1.08] tracking-[-0.015em] text-paper sm:text-[3.25rem] lg:text-[4rem]">
-            Let&rsquo;s make something worth keeping.
+            Get in touch.
           </h2>
         </Reveal>
 

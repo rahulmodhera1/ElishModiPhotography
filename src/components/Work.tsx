@@ -49,13 +49,13 @@ export function Work({
   ];
 
   return (
-    <section id="work" className="border-t border-rule-soft py-24 sm:py-32">
+    <section id="work" className="border-t border-rule-soft py-20 sm:py-24 lg:py-28">
       <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
-        <p className="eyebrow">Selected Work</p>
+        <p className="eyebrow">Portfolio</p>
 
         <div className="mt-6 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <h2 className="max-w-[16ch] font-display text-[2.1rem] leading-[1.1] tracking-[-0.01em] text-paper sm:text-[2.75rem]">
-            A working archive, not a greatest hits.
+            Selected work.
           </h2>
 
           {/*

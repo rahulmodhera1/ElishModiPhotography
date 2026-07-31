@@ -41,49 +41,53 @@ const IMAGE_BOX = "aspect-[3/2] lg:aspect-auto lg:h-[26rem] xl:h-[30rem]";
 
 export function Offerings({ onSelect }: { onSelect: (id: CategoryId) => void }) {
   return (
-    <section id="services" className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 sm:py-32">
-      <h2 className="max-w-[20ch] font-display text-[2.1rem] leading-[1.1] tracking-[-0.01em] text-paper sm:text-[2.75rem]">
-        Six things I shoot, one way of working.
-      </h2>
+    <section id="services" className="border-t border-rule-soft py-20 sm:py-24 lg:py-28">
+      <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
+        <p className="eyebrow">Services</p>
 
-      <div className="mt-12 grid grid-cols-1 gap-x-5 gap-y-12 lg:grid-cols-12 lg:gap-y-16">
-        {offerings.map((item, i) => (
-          <RevealImage key={item.id} className={spans[i]} delay={(i % 2) * 0.06}>
-            <button
-              type="button"
-              onClick={() => onSelect(item.id)}
-              className="group block w-full text-left"
-            >
-              <div className={`relative w-full overflow-hidden bg-ink-raised ${IMAGE_BOX}`}>
-                <Image
-                  src={item.image}
-                  alt={item.alt}
-                  fill
-                  quality={82}
-                  sizes="(max-width: 1024px) 100vw, 800px"
-                  className="motion-safe-transform object-cover duration-[700ms] ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-[1.04]"
-                />
-              </div>
+        <h2 className="mt-6 max-w-[20ch] font-display text-[2.1rem] leading-[1.1] tracking-[-0.01em] text-paper sm:text-[2.75rem]">
+          What I photograph.
+        </h2>
 
-              <div className="mt-5 flex items-start justify-between gap-6">
-                <div>
-                  <h3 className="font-display text-[1.6rem] leading-tight text-paper sm:text-[1.85rem]">
-                    {item.title}
-                  </h3>
-                  <p className="mt-2.5 max-w-[44ch] text-[0.9375rem] leading-relaxed text-paper-dim">
-                    {item.blurb}
-                  </p>
-                  <p className="mt-4 text-[0.75rem] uppercase tracking-[0.2em] text-gold">
-                    {formatPrice(item.price, item.unit)}
-                  </p>
+        <div className="mt-12 grid grid-cols-1 gap-x-5 gap-y-12 lg:grid-cols-12 lg:gap-y-16">
+          {offerings.map((item, i) => (
+            <RevealImage key={item.id} className={spans[i]} delay={(i % 2) * 0.06}>
+              <button
+                type="button"
+                onClick={() => onSelect(item.id)}
+                className="group block w-full text-left"
+              >
+                <div className={`relative w-full overflow-hidden bg-ink-raised ${IMAGE_BOX}`}>
+                  <Image
+                    src={item.image}
+                    alt={item.alt}
+                    fill
+                    quality={82}
+                    sizes="(max-width: 1024px) 100vw, 800px"
+                    className="motion-safe-transform object-cover duration-[700ms] ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-[1.04]"
+                  />
                 </div>
-                <span className="motion-safe-transform mt-2 shrink-0 text-paper-faint duration-[300ms] ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:text-gold group-hover:translate-x-1 group-hover:-translate-y-1">
-                  <ArrowUpRightIcon size={22} weight="light" />
-                </span>
-              </div>
-            </button>
-          </RevealImage>
-        ))}
+
+                <div className="mt-5 flex items-start justify-between gap-6">
+                  <div>
+                    <h3 className="font-display text-[1.6rem] leading-tight text-paper sm:text-[1.85rem]">
+                      {item.title}
+                    </h3>
+                    <p className="mt-2.5 max-w-[44ch] text-[0.9375rem] leading-relaxed text-paper-dim">
+                      {item.blurb}
+                    </p>
+                    <p className="mt-4 text-[0.75rem] uppercase tracking-[0.2em] text-gold">
+                      {formatPrice(item.price, item.unit)}
+                    </p>
+                  </div>
+                  <span className="motion-safe-transform mt-2 shrink-0 text-paper-faint duration-[300ms] ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:text-gold group-hover:translate-x-1 group-hover:-translate-y-1">
+                    <ArrowUpRightIcon size={22} weight="light" />
+                  </span>
+                </div>
+              </button>
+            </RevealImage>
+          ))}
+        </div>
       </div>
     </section>
   );
