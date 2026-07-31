@@ -97,6 +97,11 @@ export function Work({
           </div>
         </div>
 
+        {/*
+          No `items-*` override here on purpose: CSS Grid's default alignment
+          is stretch, and that default is what makes every tile in a row match
+          its tallest row-mate. WorkTile relies on it (see the comment there).
+        */}
         <motion.div
           layout={!reduce}
           className="mt-12 grid grid-cols-1 gap-3 sm:grid-cols-6 sm:gap-4"

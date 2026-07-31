@@ -53,7 +53,7 @@ export function Hero() {
       >
         <Image
           src="/images/hero/hero.jpg"
-          alt="A castle at the end of a formal garden path, framed by trees, in monochrome"
+          alt="An aerial view of a small boat carving a wake toward an anchored sailboat, in monochrome"
           fill
           priority
           quality={90}

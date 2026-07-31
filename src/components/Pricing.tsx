@@ -127,12 +127,17 @@ export function Pricing() {
                         ) : null}
                       </div>
 
-                      {/* The dotted leader, hidden below sm where there is not
-                          enough width left for it to do useful work once the
-                          thumbnail and both text blocks are accounted for. */}
+                      {/*
+                        A thin solid rule stands in for the classic dotted
+                        leader. Dots read as a typed table of contents; a
+                        hairline with breathing room on both ends reads as a
+                        printed rate card. Hidden below sm, where there is not
+                        enough width left for it to do useful work once the
+                        thumbnail and both text blocks are accounted for.
+                      */}
                       <span
                         aria-hidden
-                        className="hidden h-0 flex-1 border-b border-dotted border-rule sm:mb-[0.3em] sm:block"
+                        className="hidden h-px flex-1 bg-rule sm:mx-1 sm:block"
                       />
 
                       <span className="shrink-0 font-display text-[1.1rem] leading-tight text-gold tabular-nums sm:text-[1.3rem]">

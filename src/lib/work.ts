@@ -233,8 +233,6 @@ export const photos: Photo[] = [
     width: 2400,
     height: 1600,
     scale: "wide",
-    /* Also the master for the hero. scripts/grade-hero.mjs reads this file and
-       writes the graded monochrome version to public/images/hero/hero.jpg. */
   },
   {
     src: "/images/work/family/family-03.jpg",
@@ -275,6 +273,16 @@ export const photos: Photo[] = [
     width: 2000,
     height: 1125,
     scale: "full",
+  },
+  {
+    src: "/images/work/landscape/landscape-04.jpg",
+    category: "landscape",
+    alt: "An aerial view of a small boat carving a wake toward an anchored sailboat on open water",
+    width: 2400,
+    height: 1600,
+    scale: "wide",
+    /* Also the master for the hero. scripts/grade-hero.mjs reads this file and
+       writes the graded monochrome version to public/images/hero/hero.jpg. */
   },
   {
     src: "/images/work/vehicle/vehicle-03.jpg",

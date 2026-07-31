@@ -1,21 +1,25 @@
 /**
  * Grades the hero photograph to sit inside a black, white and gold page.
  *
- * The source is a bright, blue-sky, green-foliage colour frame. Dropped in
- * untouched it fights the palette on every axis, so this does four things:
+ * The source is an aerial shot of boats on open water: a small runabout
+ * carving a wake toward an anchored sailboat, already fairly desaturated
+ * from the water and overcast light. Dropped in untouched it is close to the
+ * palette already, but still needs:
  *
  *   1. Monochrome. The page is black and white; the hero is the page's
- *      background, not a portfolio piece, so it follows the palette.
+ *      background, not a portfolio piece, so it follows the palette exactly
+ *      rather than approximately.
  *   2. Split-tone rather than tint. tint() carries colour through the
  *      midtones, which is the definition of sepia and reads as an old
  *      photograph. Building the gold as an alpha mask off the luminance puts
- *      it only in the highlights and leaves the shadows neutral black. That is
- *      the difference between "aged" and "black and white with a gold cast".
- *   3. A graduated darkening across the sky. The sky is roughly 40% of the
- *      frame and near-white, which would put a pale band directly under a
- *      transparent nav on a black site. Darkening it top-down is the same move
- *      as an ND grad on the lens, and it also pushes the castle forward as the
- *      focal point.
+ *      it only in the highlights, mainly the wake itself, and leaves the deep
+ *      water neutral black. That is the difference between "aged" and "black
+ *      and white with a gold cast".
+ *   3. A gentle top-to-bottom grade rather than the sky-specific one a
+ *      horizon shot needs. There is no sky in this frame, it is water end to
+ *      end, so the top is left almost untouched (aerial haze already lightens
+ *      distance naturally) and the bottom third is grounded darker, which
+ *      also happens to be where the page's own text sits.
  *   4. A vignette, so the frame closes into the page ground instead of ending
  *      at a hard edge.
  *
@@ -26,7 +30,9 @@
  *
  * TO CHANGE THE HERO: point SRC at the new photograph and re-run. Expect to
  * retune TONE_FLOOR and the gradient stops for a frame with a different
- * tonal balance; the values below are fitted to a bright sky over grey stone.
+ * tonal balance, and re-run scripts/check-hero-contrast.mjs afterward: it is
+ * the thing that actually decides whether the copy is still readable, not
+ * how the grade looks in a screenshot.
  *
  * Run with:  node scripts/grade-hero.mjs
  */
@@ -34,7 +40,7 @@ import { join } from "node:path";
 import sharp from "sharp";
 
 const ROOT = process.cwd();
-const SRC = join(ROOT, "public/images/work/landscape/landscape-02.jpg");
+const SRC = join(ROOT, "public/images/work/landscape/landscape-04.jpg");
 const OUT = join(ROOT, "public/images/hero/hero.jpg");
 const W = 2400;
 const H = 1600;
@@ -42,8 +48,8 @@ const GOLD = { r: 201, g: 169, b: 97 };
 
 /* Luminance floor below which no gold is applied, and the ceiling alpha at
    pure white. Keeping the floor high is what protects the shadows. */
-const TONE_FLOOR = 104;
-const TONE_MAX = 0.44;
+const TONE_FLOOR = 100;
+const TONE_MAX = 0.42;
 
 async function splitTone(greyBuf) {
   const a = (TONE_MAX * 255) / (255 - TONE_FLOOR);
@@ -73,16 +79,15 @@ async function splitTone(greyBuf) {
     .toBuffer();
 }
 
-/* Graduated darkening: heavy at the top of the sky, gone by the rooflines,
-   with a light touch returning at the very bottom under the headline. */
+/* Gentle top-to-bottom grade. No sky to protect here, so this is mostly about
+   grounding the bottom third rather than rescuing a blown-out top. */
 const gradient = Buffer.from(
   `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}">
     <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%"   stop-color="#000" stop-opacity="0.74"/>
-      <stop offset="30%"  stop-color="#000" stop-opacity="0.34"/>
-      <stop offset="52%"  stop-color="#000" stop-opacity="0.04"/>
-      <stop offset="78%"  stop-color="#000" stop-opacity="0.06"/>
-      <stop offset="100%" stop-color="#000" stop-opacity="0.30"/>
+      <stop offset="0%"   stop-color="#000" stop-opacity="0.12"/>
+      <stop offset="35%"  stop-color="#000" stop-opacity="0.02"/>
+      <stop offset="65%"  stop-color="#000" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0.46"/>
     </linearGradient></defs>
     <rect width="${W}" height="${H}" fill="url(#g)"/>
   </svg>`,
@@ -103,9 +108,10 @@ async function main() {
     .rotate()
     .resize(W, H, { fit: "cover" })
     .greyscale()
-    /* Lift contrast and crush the blacks so the foliage reads as true black
-       against the page rather than as dark grey. */
-    .linear(1.3, -42)
+    /* Milder than the castle's grade: this source already has real contrast
+       between the whitewater and the deep water, so it needs lifting, not
+       rescuing. */
+    .linear(1.22, -28)
     .toColourspace("srgb")
     .png()
     .toBuffer();

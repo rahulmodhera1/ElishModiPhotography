@@ -8,6 +8,21 @@ import type { Photo } from "@/lib/work";
 /**
  * One frame in the grid.
  *
+ * `aspect` is a preferred ratio, not a guarantee. CSS Grid sizes each row to
+ * its tallest natural item, but a plain aspect-ratio box does not stretch to
+ * match a taller row-mate on its own: aspect-ratio wins over grid's stretch
+ * alignment by design, so a "tall" tile (2 columns, 4:5) sitting beside a
+ * "wide" one (4 columns, 4:3) was left shorter than the row, and the leftover
+ * height showed as dead space under it rather than more photograph.
+ *
+ * `h-full` on both this element and its inner wrapper fixes that without
+ * discarding the aspect ratio: at the point Grid measures the row's natural
+ * height, percentages against an as-yet-undetermined ancestor resolve to
+ * `auto`, so the aspect ratio still sets each tile's contribution correctly.
+ * Once the row height is fixed and the grid item is stretched to it, `h-full`
+ * resolves for real and the tile grows to match, and object-cover crops the
+ * extra into the frame instead of leaving it blank.
+ *
  * Cursor-aware hover: a small "View" mark trails the pointer inside the tile.
  * It is spring interpolated rather than pinned to the raw coordinates, because
  * a value that tracks the mouse exactly reads as mechanical. The native system
@@ -60,9 +75,9 @@ export function WorkTile({
       onPointerMove={handleMove}
       onClick={onOpen}
       aria-label={`Open image ${index + 1}: ${photo.alt}`}
-      className="group relative block w-full cursor-pointer overflow-hidden bg-ink-raised"
+      className="group relative block h-full w-full cursor-pointer overflow-hidden bg-ink-raised"
     >
-      <div className={`relative w-full ${aspect}`}>
+      <div className={`relative h-full w-full ${aspect}`}>
         <Image
           src={photo.src}
           alt={photo.alt}
