@@ -93,11 +93,15 @@ const gradient = Buffer.from(
   </svg>`,
 );
 
+/* Barely-there now: just enough to keep the frame from ending on a hard
+   edge. The water is the point of this photograph and needs to read
+   unbroken corner to corner, especially to the right of the boat where
+   an aggressive vignette previously crushed the wake and wash to black. */
 const vignette = Buffer.from(
   `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}">
-    <defs><radialGradient id="v" cx="50%" cy="46%" r="74%">
-      <stop offset="38%"  stop-color="#000" stop-opacity="0"/>
-      <stop offset="100%" stop-color="#000" stop-opacity="0.55"/>
+    <defs><radialGradient id="v" cx="50%" cy="46%" r="90%">
+      <stop offset="70%"  stop-color="#000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0.22"/>
     </radialGradient></defs>
     <rect width="${W}" height="${H}" fill="url(#v)"/>
   </svg>`,

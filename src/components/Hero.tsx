@@ -63,7 +63,7 @@ export function Hero() {
       </motion.div>
 
       {/*
-        Three scrims.
+        Two scrims.
 
         The pedestal is the one doing the real work, and it is sized in rem,
         not percent. A percentage-height gradient looked right at 900px tall
@@ -97,9 +97,16 @@ export function Hero() {
         miss, and this pedestal is sized against that script, not a
         screenshot. Re-run it after touching any number here.
 
-        The ambient top wash and the left-weighted horizontal pass are
-        unchanged: still percentage-based, because nothing rem-sized sits up
-        there for a fixed size to fight.
+        The ambient top wash is unchanged: still percentage-based, because
+        nothing rem-sized sits up there for a fixed size to fight.
+
+        There used to be a third, left-weighted horizontal pass here, from
+        when the copy sat pinned to the left edge. Now that the copy is
+        centered, a lopsided full-height wash would darken one side of the
+        photograph for no reason and still leave the other side of the
+        centered text under-covered. The pedestal alone carries the copy;
+        everything above it is left as close to untouched as contrast
+        allows.
       */}
       <div
         aria-hidden
@@ -109,12 +116,17 @@ export function Hero() {
         aria-hidden
         className="absolute inset-x-0 bottom-0 z-0 h-[38rem] bg-gradient-to-t from-ink from-0% via-ink/85 via-75% to-transparent to-100% lg:h-[44rem]"
       />
-      <div
-        aria-hidden
-        className="absolute inset-0 z-0 bg-gradient-to-r from-ink via-ink/45 to-transparent"
-      />
 
-      <div className="relative z-10 mx-auto w-full max-w-[1400px] px-5 pb-16 pt-24 sm:px-8 sm:pb-24">
+      {/*
+        Centered rather than pinned to the left edge. The boats and their
+        wake sit in the top two thirds of this photograph and span nearly
+        its full width, so the one part of the frame that stays clear at
+        every crop is the lower band of open water: centering the copy
+        there, instead of anchoring it to the left, keeps it off the
+        subject while still reading as deliberately placed rather than
+        stranded in a corner.
+      */}
+      <div className="relative z-10 mx-auto flex w-full max-w-[1400px] flex-col items-center px-5 pb-16 pt-24 text-center sm:px-8 sm:pb-24">
         <motion.p
           /* gold-bright, not gold: this is the only eyebrow that sits on a
              photograph rather than on the page ground. See globals.css. */
