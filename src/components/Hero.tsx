@@ -105,14 +105,25 @@ export function Hero() {
           gradient's falloff is exact math, and exact math still reads as a
           shape with an edge once it sits over a busy, textured background
           like open water: the first version of this looked like a rounded
-          rectangle laid over the photograph. blur-[80px] is what actually
+          rectangle laid over the photograph. The blur is what actually
           softens it, the same way a stage light gets softened by a diffuser
           rather than by dimming it. z-[-1] keeps it under the type but
           above the photograph, inside this wrapper's own stacking context.
+
+          The top and bottom reach are deliberately different, not the
+          symmetric box the first version used. The wake crosses close
+          behind the eyebrow, the topmost line, so a big symmetric blur
+          bled up into it and started dimming the wake itself, exactly the
+          "taking away from the photo" this exists to avoid. Below the copy
+          is open water with nothing to protect, so that side can carry
+          more reach without cost. Pulling the top in and reducing the
+          blur radius keeps the glow from climbing into the wake; the
+          smaller top margin is made up in contrast by the box's own
+          opacity rather than by spread.
         */}
         <div
           aria-hidden
-          className="pointer-events-none absolute -inset-x-6 -inset-y-12 z-[-1] rounded-[4rem] bg-ink/95 blur-[70px] sm:-inset-x-10 sm:-inset-y-16 sm:blur-[90px]"
+          className="pointer-events-none absolute -inset-x-6 -top-4 -bottom-14 z-[-1] rounded-[4rem] bg-ink blur-[45px] sm:-inset-x-10 sm:-top-6 sm:-bottom-20 sm:blur-[60px]"
         />
 
         <motion.p
