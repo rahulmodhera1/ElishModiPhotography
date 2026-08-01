@@ -17,13 +17,22 @@ export function Footer() {
             </p>
           </div>
 
+          {/*
+            The padding on these links is the tap target, not decoration.
+
+            Set as text alone they were 16px tall, which is a fifth of a
+            fingertip and under even the 24px WCAG minimum, in the part of the
+            page most likely to be reached one-handed. Padding takes them to
+            32px and the list gap comes down to match, so the block occupies
+            roughly the space it did before and the links are hittable.
+          */}
           <nav aria-label="Footer" className="lg:col-span-3">
-            <ul className="space-y-3">
+            <ul className="space-y-1">
               {nav.map((item) => (
                 <li key={item.href}>
                   <a
                     href={item.href}
-                    className="text-[0.75rem] uppercase tracking-[0.2em] text-paper-dim transition-colors duration-200 hover:text-paper"
+                    className="inline-block py-2 text-[0.75rem] uppercase tracking-[0.2em] text-paper-dim transition-colors duration-200 hover:text-paper"
                   >
                     {item.label}
                   </a>
@@ -32,16 +41,16 @@ export function Footer() {
             </ul>
           </nav>
 
-          <div className="space-y-3 lg:col-span-4">
+          <div className="space-y-1 lg:col-span-4">
             <a
               href={`mailto:${site.email}`}
-              className="block text-[0.9375rem] text-paper-dim transition-colors duration-200 hover:text-paper"
+              className="block py-1.5 text-[0.9375rem] text-paper-dim transition-colors duration-200 hover:text-paper"
             >
               {site.email}
             </a>
             <a
               href={`tel:${site.phoneHref}`}
-              className="block text-[0.9375rem] text-paper-dim transition-colors duration-200 hover:text-paper"
+              className="block py-1.5 text-[0.9375rem] text-paper-dim transition-colors duration-200 hover:text-paper"
             >
               {site.phone}
             </a>
@@ -49,7 +58,7 @@ export function Footer() {
               href={site.instagram}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 text-[0.9375rem] text-paper-dim transition-colors duration-200 hover:text-paper"
+              className="inline-flex items-center gap-2 py-1.5 text-[0.9375rem] text-paper-dim transition-colors duration-200 hover:text-paper"
             >
               <InstagramLogoIcon size={17} weight="light" />
               {site.instagramHandle}

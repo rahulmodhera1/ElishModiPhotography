@@ -139,6 +139,39 @@ body {
 }
 
 /*
+  Portfolio tiles past the first phone-sized batch.
+
+  The reveal is a CSS animation rather than a transition because these tiles
+  are hidden with display:none until "Show more" reaches them, and a
+  transition cannot run on an element that was not being displayed a frame
+  ago. An animation can: it plays the moment the element starts being drawn.
+
+  --reveal-index staggers a batch so the row arrives in sequence instead of
+  all at once. It is set per tile in Work.tsx.
+
+  Phone only. From sm up the whole grid is rendered and none of this applies.
+*/
+@media (max-width: 39.99rem) {
+  @media (prefers-reduced-motion: no-preference) {
+    .tile-reveal {
+      animation: tile-reveal 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+      animation-delay: calc(var(--reveal-index, 0) * 60ms);
+    }
+  }
+}
+
+@keyframes tile-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/*
   Film grain. Fixed and pointer-events-none so it never repaints with scroll.
   A photography site should feel like it has a surface.
 */

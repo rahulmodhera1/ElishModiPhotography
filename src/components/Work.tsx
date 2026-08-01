@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "motion/react";
-import { useMemo, useState } from "react";
+import { useMemo, useState, type CSSProperties } from "react";
 import {
   categories,
   photos as allPhotos,
@@ -28,6 +28,9 @@ import { WorkTile } from "./WorkTile";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
+/** How many frames a phone shows before asking. Also the size of each batch. */
+const MOBILE_BATCH = 6;
+
 export function Work({
   filter,
   onFilterChange,
@@ -36,12 +39,29 @@ export function Work({
   onFilterChange: (next: CategoryId | "all") => void;
 }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [shown, setShown] = useState(MOBILE_BATCH);
   const reduce = useSafeReducedMotion();
 
   const visible = useMemo<Photo[]>(
     () => (filter === "all" ? allPhotos : allPhotos.filter((p) => p.category === filter)),
     [filter],
   );
+
+  /*
+    A new filter is a new set, so it starts closed again. Without this, opening
+    everything under "All" and then picking a category would silently expand
+    that category too, and the reader would never see the control that did it.
+
+    Derived from state rather than run in an effect: this needs to be true on
+    the same render the filter changes on, not a paint later.
+  */
+  const [lastFilter, setLastFilter] = useState(filter);
+  if (lastFilter !== filter) {
+    setLastFilter(filter);
+    setShown(MOBILE_BATCH);
+  }
+
+  const remaining = visible.length - shown;
 
   const filters = [
     { id: "all" as const, label: "All" },
@@ -79,7 +99,7 @@ export function Work({
                   type="button"
                   onClick={() => onFilterChange(item.id)}
                   className={[
-                    "relative shrink-0 whitespace-nowrap pb-2 text-[0.75rem] uppercase tracking-[0.2em] transition-colors duration-200",
+                    "relative shrink-0 whitespace-nowrap pt-3 pb-2 text-[0.75rem] uppercase tracking-[0.2em] transition-colors duration-200",
                     active ? "text-paper" : "text-paper-faint hover:text-paper-dim",
                   ].join(" ")}
                 >
@@ -108,27 +128,69 @@ export function Work({
           transition={{ duration: 0.45, ease: EASE }}
         >
           <AnimatePresence mode="popLayout" initial={false}>
-            {visible.map((photo, i) => (
-              <motion.figure
-                key={photo.src}
-                layout={!reduce}
-                initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.97 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.98 }}
-                transition={{ duration: 0.4, ease: EASE }}
-                className={`${scaleClass[photo.scale]} m-0`}
-              >
-                <WorkTile
-                  photo={photo}
-                  index={i}
-                  aspect={scaleAspect[photo.scale]}
-                  sizes={scaleSizes[photo.scale]}
-                  onOpen={() => setOpenIndex(i)}
-                />
-              </motion.figure>
-            ))}
+            {visible.map((photo, i) => {
+              const held = i >= shown;
+              return (
+                <motion.figure
+                  key={photo.src}
+                  layout={!reduce}
+                  initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.97 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.98 }}
+                  transition={{ duration: 0.4, ease: EASE }}
+                  /*
+                    `hidden sm:block` rather than not rendering these at all,
+                    which is what keeps the batching a phone-only concern: the
+                    markup is identical at every width, so there is no viewport
+                    measurement in render and nothing to mismatch at hydration.
+                    From sm up the whole grid is there as it always was.
+                  */
+                  className={[
+                    scaleClass[photo.scale],
+                    "m-0",
+                    held ? "hidden sm:block" : "",
+                    i >= MOBILE_BATCH ? "tile-reveal" : "",
+                  ].join(" ")}
+                  style={{ "--reveal-index": i % MOBILE_BATCH } as CSSProperties}
+                >
+                  <WorkTile
+                    photo={photo}
+                    index={i}
+                    aspect={scaleAspect[photo.scale]}
+                    sizes={scaleSizes[photo.scale]}
+                    onOpen={() => setOpenIndex(i)}
+                  />
+                </motion.figure>
+              );
+            })}
           </AnimatePresence>
         </motion.div>
+
+        {/*
+          Phone only. Eighteen frames at their true ratio is around five
+          screens of scrolling before the page moves on, which reads as a site
+          that will not end rather than as a body of work. A batch at a time
+          keeps the section a reasonable length and makes seeing the rest a
+          choice. From sm up the grid is short enough in rows that there is
+          nothing to page through, so the control is not rendered.
+
+          The count is in the label because "Show more" alone does not say
+          whether it means three more or thirty.
+        */}
+        {remaining > 0 ? (
+          <div className="mt-8 sm:hidden">
+            <button
+              type="button"
+              onClick={() => setShown((n) => n + MOBILE_BATCH)}
+              className="motion-safe-transform w-full border border-rule px-6 py-4 text-[0.75rem] uppercase tracking-[0.2em] text-paper duration-[140ms] ease-[cubic-bezier(0.23,1,0.32,1)] hover:border-paper/45 active:scale-[0.99]"
+            >
+              Show {Math.min(remaining, MOBILE_BATCH)} more
+              <span className="ml-2 text-paper-faint">
+                {shown} of {visible.length}
+              </span>
+            </button>
+          </div>
+        ) : null}
 
         {/* Empty state. Reachable the moment the client removes the last photo
             from a category, which is exactly when a blank grid is confusing. */}
