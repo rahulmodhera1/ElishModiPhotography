@@ -185,9 +185,19 @@ export function Hero() {
           height back while the space around it does not just moves the
           problem: on a 620px window the four fixed margins were worth more
           than a line of the headline.
+
+          From lg up the line-length cap comes off and the size switches to a
+          width-driven one, so the headline sets on a single line instead of
+          wrapping to two. That is the whole shape of this block: two wrapped
+          lines made a tall narrow column with the photograph left idle on
+          either side of it, and one long line spends that width instead. It
+          also costs half the height, which the boats above get back as
+          clearance. The vh term stays as a ceiling rather than the driver,
+          because a short window still cannot afford a headline sized purely
+          off a wide one.
         */}
         <motion.h1
-          className="mt-[clamp(0.65rem,1.8vh,1.25rem)] max-w-[16ch] font-display text-[min(10.5vw,clamp(1.9rem,5.5vh+0.2rem,4.25rem))] leading-[1.05] tracking-[-0.015em] text-paper"
+          className="mt-[clamp(0.65rem,1.8vh,1.25rem)] max-w-[16ch] font-display text-[min(10.5vw,clamp(1.9rem,5.5vh+0.2rem,4.25rem))] leading-[1.05] tracking-[-0.015em] text-paper lg:max-w-none lg:text-[min(4.9vw,clamp(2rem,7.5vh,5.5rem))]"
           initial={reduce ? { opacity: 0 } : { opacity: 0, y: 22 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.24, ease: EASE }}
@@ -195,33 +205,59 @@ export function Hero() {
           Portraits made to last a lifetime.
         </motion.h1>
 
-        {/* 56ch, not 46: wide enough that this sets in two lines on a desktop
-            rather than three, which is one fewer line of height competing
-            with the photograph for the same band of water. */}
-        <motion.p
-          className="mt-[clamp(0.65rem,1.8vh,1.25rem)] max-w-[56ch] text-[0.9rem] leading-relaxed text-paper-dim sm:text-[0.9375rem]"
-          initial={reduce ? { opacity: 0 } : { opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.34, ease: EASE }}
-        >
-          Specializing in newborn, child, family, and portrait photography, thoughtfully
-          composed with natural light throughout Toronto and the GTA.
-        </motion.p>
+        {/*
+          Supporting line and buttons: stacked on a phone, side by side from
+          lg.
 
-        {/* Side by side even on a phone. Stacked, these two cost 100px of the
-            clear water; in a row they cost 44px, and at 350px of usable width
-            both still clear a comfortable tap target. */}
-        <motion.div
-          className="mt-[clamp(1rem,3vh,2rem)] flex flex-row flex-wrap items-center justify-center gap-3 sm:gap-4"
-          initial={reduce ? { opacity: 0 } : { opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.44, ease: EASE }}
-        >
-          <CTA href="#work">{site.cta.work}</CTA>
-          <CTA href="#contact" variant="quiet">
-            {site.cta.contact}
-          </CTA>
-        </motion.div>
+          Stacked under a headline that now runs full width, these two were
+          the whole of the leftover space: a 736px paragraph and a 330px
+          button pair sitting under a 1141px headline, tapering away to
+          nothing. Setting them in a row instead makes the bottom of the
+          block about as wide as the headline, so the copy reads as a slab
+          rather than a funnel, and costs one row of height rather than two.
+
+          The paragraph is capped well short of the headline on purpose. It
+          is body copy, and a measure that matched the headline would run to
+          about 105 characters a line, which is past the point where the eye
+          loses its place returning to the left edge. Width here comes from
+          setting it beside the buttons, not from stretching the line.
+
+          That cap is the smaller of a character count and a share of the
+          viewport, because the two limits bind at opposite ends. The buttons
+          beside it are a fixed width, so a paragraph capped only in ch keeps
+          the row the same width while the headline above it shrinks with the
+          viewport, and by 1024px the row is running edge to edge under a
+          headline half its length. The vw term shrinks the paragraph in step
+          so the row keeps tracking the headline; the ch term takes back over
+          on wide screens, where the row should stop growing and the measure
+          is what matters again.
+        */}
+        <div className="mt-[clamp(0.65rem,1.8vh,1.25rem)] flex flex-col items-center gap-[clamp(1rem,3vh,2rem)] lg:flex-row lg:items-center lg:gap-12">
+          <motion.p
+            className="max-w-[56ch] text-[0.9rem] leading-relaxed text-paper-dim sm:text-[0.9375rem] lg:max-w-[min(60ch,38vw)] lg:text-left"
+            initial={reduce ? { opacity: 0 } : { opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.34, ease: EASE }}
+          >
+            Specializing in newborn, child, family, and portrait photography, thoughtfully
+            composed with natural light throughout Toronto and the GTA.
+          </motion.p>
+
+          {/* Side by side even on a phone. Stacked, these two cost 100px of
+              the clear water; in a row they cost 44px, and at 350px of usable
+              width both still clear a comfortable tap target. */}
+          <motion.div
+            className="flex shrink-0 flex-row flex-wrap items-center justify-center gap-3 sm:gap-4"
+            initial={reduce ? { opacity: 0 } : { opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.44, ease: EASE }}
+          >
+            <CTA href="#work">{site.cta.work}</CTA>
+            <CTA href="#contact" variant="quiet">
+              {site.cta.contact}
+            </CTA>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
