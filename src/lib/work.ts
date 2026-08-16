@@ -8,17 +8,65 @@
  * public/images/work/<category>/ and add an entry to `photos` below. Nothing
  * else in the codebase needs to change: the filter chips, the counts, the grid
  * rhythm and the lightbox all read from that array.
+ *
+ * COUPLES: portraits/ is split on disk into couples/ and individual/, but both
+ * carry `category: "portraits"` here, so the site shows one Portraits chip
+ * covering the two. If Elish later wants couples filtered on its own, add a
+ * `couples` entry to `categories` with its own description and flip the
+ * `category` field on the couples photos. Nothing else has to move.
  */
 
 export const categories = [
   /* `label` is the filter chip, kept short so seven chips still fit two lines
-     on a phone. `title` is the full offering name used everywhere else. */
-  { id: "baby", label: "Baby", title: "Baby Photos" },
-  { id: "child", label: "Child", title: "Child Photos" },
-  { id: "family", label: "Family", title: "Family Photos" },
-  { id: "portraits", label: "Portraits", title: "Individual Portraits" },
-  { id: "vehicle", label: "Vehicle", title: "Vehicle Photography" },
-  { id: "landscape", label: "Landscape", title: "Landscape Photos" },
+     on a phone. `title` is the full offering name used everywhere else.
+
+     `description` is Elish's own copy for that kind of session, quoted from the
+     brief. It is shown under the filter bar in Work, one at a time, and is the
+     only long-form writing in the portfolio section, so keep any future edits
+     to three sentences or so. There is deliberately no description for "All":
+     the strip only appears once a category is chosen. */
+  {
+    id: "baby",
+    label: "Baby",
+    title: "Baby Photos",
+    description:
+      "I specialize in capturing timeless, heartfelt photographs of babies in a calm and comfortable environment. From newborn sessions to milestone portraits, I focus on authentic expressions, tiny details, and natural moments that parents will cherish for years to come. My style is soft, warm, and baby-focused, creating beautiful memories of every stage of your little one's early journey.",
+  },
+  {
+    id: "child",
+    label: "Child",
+    title: "Child Photos",
+    description:
+      "I specialize in capturing natural, personality-filled portraits of children and teens ages 4 to 18. My sessions are relaxed and fun, helping kids feel comfortable so their true character can shine through. From playful childhood moments to confident teen portraits, I focus on authentic expressions and timeless images that families will treasure for years.",
+  },
+  {
+    id: "family",
+    label: "Family",
+    title: "Family Photos",
+    description:
+      "Let's capture genuine, heartfelt family moments in a relaxed and natural setting. My family sessions focus on real connections, candid interactions, and timeless imagery that reflects your family's unique bond. From playful moments to quiet embraces, I create warm, authentic photographs that families can treasure for generations.",
+  },
+  {
+    id: "portraits",
+    label: "Portraits",
+    title: "Individual Portraits",
+    description:
+      "I offer individual portrait sessions at a location of your choice, designed to reflect your personality and style in a natural, authentic way. Whether it's urban, outdoor, or a meaningful personal spot, I focus on capturing confident, relaxed portraits with a timeless feel. My goal is to create images that feel genuine, expressive, and uniquely you.",
+  },
+  {
+    id: "vehicle",
+    label: "Vehicle",
+    title: "Vehicle Photography",
+    description:
+      "I offer professional vehicle photography that highlights the design, character, and details of cars in a clean, cinematic style. Whether for personal keepsakes, listings, or creative projects, I focus on lighting, composition, and location to showcase each vehicle at its best. The result is polished, dynamic imagery that brings out the personality and presence of every car.",
+  },
+  {
+    id: "landscape",
+    label: "Landscape",
+    title: "Landscape Photos",
+    description:
+      "I specialize in landscape photography that showcases destinations in a visually compelling and inspiring way to support travel and tourism. My images highlight natural beauty, atmosphere, and unique local character, helping places stand out and attract visitors. From sweeping vistas to intimate scenic details, I create impactful visuals that capture the essence of a location and encourage exploration.",
+  },
 ] as const;
 
 export type CategoryId = (typeof categories)[number]["id"];
@@ -179,7 +227,7 @@ export const photos: Photo[] = [
     scale: "full",
   },
   {
-    src: "/images/work/portraits/portraits-01.jpg",
+    src: "/images/work/portraits/individual/individual-01.jpg",
     category: "portraits",
     alt: "Placeholder: close portrait, three quarter turn, shallow depth of field",
     width: 1200,
@@ -219,7 +267,7 @@ export const photos: Photo[] = [
     scale: "half",
   },
   {
-    src: "/images/work/portraits/portraits-02.jpg",
+    src: "/images/work/portraits/individual/individual-02.jpg",
     category: "portraits",
     alt: "Placeholder: studio portrait on a grey ground, single hard key light",
     width: 1200,
@@ -259,7 +307,7 @@ export const photos: Photo[] = [
     scale: "half",
   },
   {
-    src: "/images/work/portraits/portraits-03.jpg",
+    src: "/images/work/portraits/individual/individual-03.jpg",
     category: "portraits",
     alt: "Placeholder: environmental portrait at a work bench, mid conversation",
     width: 1800,

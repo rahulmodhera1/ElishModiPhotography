@@ -69,10 +69,14 @@ export function Testimonials() {
               >
                 &ldquo;{current.quote}&rdquo;
               </blockquote>
+              {/* Name, then what the session was and when. The date is part of
+                  the attribution rather than a separate line: a review reads as
+                  evidence, and evidence carries a date. */}
               <figcaption className="mt-8 text-[0.6875rem] uppercase tracking-[0.24em] text-paper-faint">
                 {current.name}
                 <span className="mt-1.5 block normal-case tracking-normal text-paper-dim">
                   {current.role}
+                  <span className="text-paper-faint"> &middot; {current.date}</span>
                 </span>
               </figcaption>
             </motion.figure>

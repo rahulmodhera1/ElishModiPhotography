@@ -31,6 +31,8 @@ public/images/
 │   ├── child/
 │   ├── family/
 │   ├── portraits/
+│   │   ├── couples/       couple sessions, incl. the baby shower set
+│   │   └── individual/    single-subject portraits
 │   ├── vehicle/
 │   └── landscape/
 └── og/
@@ -58,6 +60,24 @@ Two steps.
 Valid categories are `baby`, `child`, `family`, `portraits`, `vehicle` and
 `landscape`. TypeScript will reject anything else.
 
+## Couples and individual portraits
+
+`portraits/` is split in two on disk. Files go in
+`portraits/couples/` or `portraits/individual/`, named `couples-01.jpg` and
+`individual-01.jpg` upward, two digits so the ordering stays stable. Both kinds
+are entered with `category: "portraits"`, so the site shows a single **Portraits**
+chip covering the two, and the folder is only how the source files are kept
+straight.
+
+To give couples its own filter chip later:
+
+1. Add `{ id: "couples", label: "Couples", title: "Couples Portraits", description: "…" }`
+   to `categories` in `src/lib/work.ts`.
+2. Change `category: "portraits"` to `category: "couples"` on those photo entries.
+
+The chips, counts and lightbox follow automatically. A `couples` description has
+to come from Elish; the brief did not include one.
+
 The filter chips, the counts, the grid rhythm and the lightbox all read from
 that array. There is no second place to update.
 
@@ -78,3 +98,6 @@ that array. There is no second place to update.
   time.
 - Keep the six category folders balanced. The grid reads best with at least
   three or four frames per category.
+- Strip EXIF before committing. `scripts/import-photos.mjs` does it as part of
+  resizing; camera and phone originals can carry the GPS coordinates of a
+  client's home.
