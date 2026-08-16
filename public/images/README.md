@@ -33,6 +33,8 @@ public/images/
 │   ├── portraits/
 │   │   ├── couples/       couple sessions, incl. the baby shower set
 │   │   └── individual/    single-subject portraits
+│   │                      couples/ is `category: "couples"`,
+│   │                      individual/ is `category: "portraits"`
 │   ├── vehicle/
 │   └── landscape/
 └── og/
@@ -57,26 +59,30 @@ Two steps.
 },
 ```
 
-Valid categories are `baby`, `child`, `family`, `portraits`, `vehicle` and
-`landscape`. TypeScript will reject anything else.
+Valid categories are `baby`, `child`, `family`, `portraits`, `couples`,
+`vehicle` and `landscape`. TypeScript will reject anything else.
 
 ## Couples and individual portraits
 
-`portraits/` is split in two on disk. Files go in
-`portraits/couples/` or `portraits/individual/`, named `couples-01.jpg` and
-`individual-01.jpg` upward, two digits so the ordering stays stable. Both kinds
-are entered with `category: "portraits"`, so the site shows a single **Portraits**
-chip covering the two, and the folder is only how the source files are kept
-straight.
+`portraits/` is split in two on disk, and the two halves are separate
+categories:
 
-To give couples its own filter chip later:
+| folder | filenames | `category` |
+| --- | --- | --- |
+| `portraits/couples/` | `couples-01.jpg` upward | `"couples"` |
+| `portraits/individual/` | `individual-01.jpg` upward | `"portraits"` |
 
-1. Add `{ id: "couples", label: "Couples", title: "Couples Portraits", description: "…" }`
-   to `categories` in `src/lib/work.ts`.
-2. Change `category: "portraits"` to `category: "couples"` on those photo entries.
+Two digits in the filename so the ordering stays stable. The **Couples** chip is
+already on the site and shows the empty state until the first couples photo is
+entered in `src/lib/work.ts`, so add the entries in the same commit as the
+files.
 
-The chips, counts and lightbox follow automatically. A `couples` description has
-to come from Elish; the brief did not include one.
+## Product photography
+
+There is no `product/` folder and no product photograph anywhere. The service is
+announced as *Coming soon* in a panel under the service cards (`comingSoon` in
+`src/lib/work.ts`) and has no price, no card and no filter chip until there is
+work to show.
 
 The filter chips, the counts, the grid rhythm and the lightbox all read from
 that array. There is no second place to update.

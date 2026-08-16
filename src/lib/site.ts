@@ -98,13 +98,18 @@ export const pricingNotes = {
   body: "Every session includes a personal consultation, a professionally edited gallery, and high-resolution files ready for both print and web. Per-guest pricing includes everyone being photographed. Travel outside the GTA and rush delivery are quoted individually before booking.",
 } as const;
 
-/* Mirrors the six offerings, plus an escape hatch for anything unlisted. */
+/* Mirrors the offerings, plus product photography, which is announced but not
+   yet priced, and an escape hatch for anything unlisted. Someone asking about
+   product work is exactly who the "coming soon" panel is written for, so the
+   form has to be able to take that inquiry. */
 export const shootTypes = [
   "Baby photos",
   "Child photos",
   "Family photos",
   "Individual portraits",
+  "Couples portraits",
   "Vehicle photography",
   "Landscape photos",
+  "Product photography (coming soon)",
   "Something else",
 ] as const;

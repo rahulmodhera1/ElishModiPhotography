@@ -9,11 +9,10 @@
  * else in the codebase needs to change: the filter chips, the counts, the grid
  * rhythm and the lightbox all read from that array.
  *
- * COUPLES: portraits/ is split on disk into couples/ and individual/, but both
- * carry `category: "portraits"` here, so the site shows one Portraits chip
- * covering the two. If Elish later wants couples filtered on its own, add a
- * `couples` entry to `categories` with its own description and flip the
- * `category` field on the couples photos. Nothing else has to move.
+ * COUPLES: portraits/ is split on disk into couples/ and individual/, and the
+ * two are separate categories here. Photographs from portraits/couples/ take
+ * `category: "couples"`, portraits/individual/ takes `category: "portraits"`.
+ * The Couples chip shows the empty state until the first of them is entered.
  */
 
 export const categories = [
@@ -52,6 +51,16 @@ export const categories = [
     title: "Individual Portraits",
     description:
       "I offer individual portrait sessions at a location of your choice, designed to reflect your personality and style in a natural, authentic way. Whether it's urban, outdoor, or a meaningful personal spot, I focus on capturing confident, relaxed portraits with a timeless feel. My goal is to create images that feel genuine, expressive, and uniquely you.",
+  },
+  {
+    id: "couples",
+    label: "Couples",
+    title: "Couples Portraits",
+    /* NEW COPY, not Elish's: the brief asked for couples as a category but did
+       not include a description for it. Written to sit beside the other five
+       and to match how his own clients describe the work. Confirm with him. */
+    description:
+      "I photograph couples the way you actually are together, whether that's a date in the city, an engagement, or a milestone worth marking. Sessions are unhurried and candid, so what you get back is the two of you rather than a pose you were put in. From quiet moments to easy laughter, I focus on natural connection and images you'll want to look back on for years.",
   },
   {
     id: "vehicle",
@@ -163,6 +172,24 @@ export const offerings = [
 export function formatPrice(price: number, unit: "fixed" | "guest") {
   return `$${price} CAD ${unit === "guest" ? "per guest" : "fixed price"}`;
 }
+
+/**
+ * Announced, not yet bookable.
+ *
+ * Elish's introduction claims product photography and there is no product work
+ * to show and no price set for it, so it is not an offering and not a portfolio
+ * category: it is one panel under the service cards that says so plainly.
+ *
+ * When the first product session happens this becomes an ordinary entry in
+ * `offerings` with a price, plus a `product` category here with photographs,
+ * and this export goes away.
+ */
+export const comingSoon = {
+  title: "Product Photography",
+  blurb:
+    "Polished product imagery for brands and small businesses, photographed with the same attention to light and detail as the portrait work.",
+  note: "Coming soon",
+} as const;
 
 /**
  * How the six offerings split across the two pricing tabs.
