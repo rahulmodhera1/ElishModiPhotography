@@ -68,6 +68,11 @@ export function Work({
     ...categories.map((c) => ({ id: c.id, label: c.label })),
   ];
 
+  /* Elish's own words for the chosen category. "All" has none on purpose: a
+     line that tried to describe six kinds of session at once would say nothing,
+     and the work underneath is the introduction. */
+  const description = categories.find((c) => c.id === filter)?.description ?? null;
+
   return (
     <section id="work" className="border-t border-rule-soft py-20 sm:py-24 lg:py-28">
       <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
@@ -116,6 +121,36 @@ export function Work({
             })}
           </div>
         </div>
+
+        {/*
+          The description of whatever is selected, directly under the chips that
+          selected it.
+
+          Height animates rather than being reserved: on "All" there is no
+          paragraph, and holding three empty lines open for a category nobody
+          has picked yet would put a hole between the heading and the work. The
+          grid below already carries `layout`, so it rides the height change
+          instead of jumping.
+        */}
+        <AnimatePresence initial={false} mode="wait">
+          {description ? (
+            <motion.div
+              key={filter}
+              initial={reduce ? { opacity: 0 } : { opacity: 0, height: 0 }}
+              animate={reduce ? { opacity: 1 } : { opacity: 1, height: "auto" }}
+              exit={reduce ? { opacity: 0 } : { opacity: 0, height: 0 }}
+              transition={{ duration: reduce ? 0 : 0.4, ease: EASE }}
+              className="overflow-hidden"
+            >
+              <p
+                aria-live="polite"
+                className="mt-8 max-w-[68ch] text-[0.9375rem] leading-[1.75] text-paper-dim"
+              >
+                {description}
+              </p>
+            </motion.div>
+          ) : null}
+        </AnimatePresence>
 
         {/*
           No `items-*` override here on purpose: CSS Grid's default alignment

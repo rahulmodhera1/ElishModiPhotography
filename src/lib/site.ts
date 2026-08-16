@@ -1,9 +1,10 @@
 /**
  * Single source of truth for everything the client will want to change.
  *
- * PLACEHOLDER COPY: every string below is written in a photographer's voice
- * but none of it is Elish's actual words. Swap it before launch. Nothing in
- * the components hardcodes copy, so editing this file edits the site.
+ * The introduction and the reviews below are Elish's own copy and real client
+ * quotes. What is still placeholder is marked as such inline: the contact
+ * details, the city and service area, and the pricing notes. Nothing in the
+ * components hardcodes copy, so editing this file edits the site.
  */
 
 export const site = {
@@ -36,45 +37,51 @@ export const nav = [
   { label: "Contact", href: "#contact" },
 ] as const;
 
-/* PLACEHOLDER bio. First person, confident, professional. Rewrite in Elish's voice. */
+/**
+ * Elish's introduction, in his own words. The closing line of what he sent is
+ * set as the pull quote rather than a fourth paragraph, so the section ends on
+ * it and nothing here is written for him.
+ */
 export const about = {
-  heading: "About Elish Modi.",
+  heading: "Introduction.",
   body: [
-    "I'm a Toronto-based portrait and family photographer dedicated to creating natural, refined imagery for clients across the GTA and beyond.",
-    "My approach favors soft natural light and genuine expression over rigid posing. The result is a collection of images that feel authentic to who you are, not performed for the camera.",
-    "Every session begins with a conversation about what matters most to you, and ends with a carefully edited gallery designed to be treasured for years to come.",
-    "Beyond portrait and family sessions, I also photograph vehicles and landscapes for clients seeking one exceptional print of something they love.",
+    "Hi, I'm Elish. Welcome to my page! I am a versatile photographer specializing in capturing meaningful, high-quality imagery across a range of subjects, including babies, children, families, individual portraits, couples, products, and landscapes.",
+    "My work is rooted in a natural, timeless style that emphasizes authentic emotion, thoughtful composition, and attention to detail.",
+    "From preserving the earliest moments of a baby's life to creating confident individual portraits, warm family memories, polished product imagery, and inspiring landscape visuals, I approach each session with creativity, care, and professionalism.",
   ],
   pullQuote:
-    "A great portrait is never a pose you hold. It is the moment just after you let it go.",
-  specialties: ["Babies", "Children", "Families", "Portraits", "Vehicles", "Landscapes"],
+    "My goal is to deliver images that feel genuine, visually compelling, and lasting—whether for personal memories, branding, or storytelling.",
+  specialties: [
+    "Babies",
+    "Children",
+    "Families",
+    "Portraits",
+    "Couples",
+    "Vehicles",
+    "Landscapes",
+  ],
 } as const;
 
 /**
- * PLACEHOLDER testimonials. These are invented and must be replaced with real,
- * permissioned client quotes before launch.
+ * Real, permissioned client reviews, quoted as they were given. `date` is when
+ * the session happened and is shown with the attribution, so a short quote
+ * still carries its context.
  *
- * Keep them pointed at offerings that actually exist. A quote praising a shoot
- * that is not on the price list reads as borrowed copy.
+ * Add new ones the same way: quote verbatim, name as the client signed it.
  */
 export const testimonials = [
   {
-    quote:
-      "He came when our daughter was nine days old and worked around her, not the other way round.",
-    name: "Priya Raghunathan",
-    role: "Baby session",
+    quote: "Elish did a great job capturing photos of us at our baby shower!",
+    name: "Pooja & Jay",
+    role: "Baby shower",
+    date: "May 2024",
   },
   {
     quote:
-      "Three generations and two toddlers in one afternoon. Nobody felt managed, and we still got the frame we wanted.",
-    name: "Dan Okonkwo",
-    role: "Family session",
-  },
-  {
-    quote:
-      "I have been photographed a lot and I usually hate it. This is the first portrait of me I actually use.",
-    name: "Simone Vasquez",
-    role: "Individual portrait",
+      "We wanted a candid photoshoot of our date in Kingston, ON and Elish captured high quality photos we can look back on.",
+    name: "Pearly & Shikhar",
+    role: "Couples session, Kingston ON",
+    date: "July 2023",
   },
 ] as const;
 
@@ -91,13 +98,18 @@ export const pricingNotes = {
   body: "Every session includes a personal consultation, a professionally edited gallery, and high-resolution files ready for both print and web. Per-guest pricing includes everyone being photographed. Travel outside the GTA and rush delivery are quoted individually before booking.",
 } as const;
 
-/* Mirrors the six offerings, plus an escape hatch for anything unlisted. */
+/* Mirrors the offerings, plus product photography, which is announced but not
+   yet priced, and an escape hatch for anything unlisted. Someone asking about
+   product work is exactly who the "coming soon" panel is written for, so the
+   form has to be able to take that inquiry. */
 export const shootTypes = [
   "Baby photos",
   "Child photos",
   "Family photos",
   "Individual portraits",
+  "Couples portraits",
   "Vehicle photography",
   "Landscape photos",
+  "Product photography (coming soon)",
   "Something else",
 ] as const;

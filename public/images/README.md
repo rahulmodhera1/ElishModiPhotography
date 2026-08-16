@@ -31,6 +31,10 @@ public/images/
 │   ├── child/
 │   ├── family/
 │   ├── portraits/
+│   │   ├── couples/       couple sessions, incl. the baby shower set
+│   │   └── individual/    single-subject portraits
+│   │                      couples/ is `category: "couples"`,
+│   │                      individual/ is `category: "portraits"`
 │   ├── vehicle/
 │   └── landscape/
 └── og/
@@ -55,8 +59,30 @@ Two steps.
 },
 ```
 
-Valid categories are `baby`, `child`, `family`, `portraits`, `vehicle` and
-`landscape`. TypeScript will reject anything else.
+Valid categories are `baby`, `child`, `family`, `portraits`, `couples`,
+`vehicle` and `landscape`. TypeScript will reject anything else.
+
+## Couples and individual portraits
+
+`portraits/` is split in two on disk, and the two halves are separate
+categories:
+
+| folder | filenames | `category` |
+| --- | --- | --- |
+| `portraits/couples/` | `couples-01.jpg` upward | `"couples"` |
+| `portraits/individual/` | `individual-01.jpg` upward | `"portraits"` |
+
+Two digits in the filename so the ordering stays stable. The **Couples** chip is
+already on the site and shows the empty state until the first couples photo is
+entered in `src/lib/work.ts`, so add the entries in the same commit as the
+files.
+
+## Product photography
+
+There is no `product/` folder and no product photograph anywhere. The service is
+announced as *Coming soon* in a panel under the service cards (`comingSoon` in
+`src/lib/work.ts`) and has no price, no card and no filter chip until there is
+work to show.
 
 The filter chips, the counts, the grid rhythm and the lightbox all read from
 that array. There is no second place to update.
@@ -78,3 +104,6 @@ that array. There is no second place to update.
   time.
 - Keep the six category folders balanced. The grid reads best with at least
   three or four frames per category.
+- Strip EXIF before committing. `scripts/import-photos.mjs` does it as part of
+  resizing; camera and phone originals can carry the GPS coordinates of a
+  client's home.

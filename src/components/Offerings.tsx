@@ -3,7 +3,7 @@
 import Image from "next/image";
 import type { CSSProperties } from "react";
 import { ArrowUpRightIcon } from "@phosphor-icons/react/dist/ssr";
-import { formatPrice, offerings, type CategoryId } from "@/lib/work";
+import { comingSoon, formatPrice, offerings, type CategoryId } from "@/lib/work";
 import { RevealImage } from "./Reveal";
 
 /**
@@ -18,7 +18,8 @@ import { RevealImage } from "./Reveal";
  * full-bleed images with no type on them at all.
  *
  * Each card is a real control: it filters the portfolio to that category and
- * scrolls you there.
+ * scrolls you there. The panel under the grid is the exception: product work is
+ * announced, not yet bookable, so it has no price, no photograph and no filter.
  */
 
 const spans = [
@@ -99,6 +100,30 @@ export function Offerings({ onSelect }: { onSelect: (id: CategoryId) => void }) 
               </button>
             </RevealImage>
           ))}
+        </div>
+
+        {/*
+          The one service that is announced rather than sold. No photograph,
+          because there is none: a stock-looking placeholder over a service that
+          does not exist yet would be the only dishonest frame on the page. A
+          bordered panel with the label where the price goes says the same thing
+          and says it faster.
+
+          Not a button either. Every card above filters the portfolio to its
+          category, and there is nothing here to filter to.
+        */}
+        <div className="mt-12 border border-rule-soft px-6 py-8 sm:px-8 sm:py-10 lg:mt-16">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-baseline sm:justify-between sm:gap-8">
+            <h3 className="font-display text-[1.6rem] leading-tight text-paper sm:text-[1.85rem]">
+              {comingSoon.title}
+            </h3>
+            <p className="shrink-0 text-[0.75rem] uppercase tracking-[0.2em] text-gold">
+              {comingSoon.note}
+            </p>
+          </div>
+          <p className="mt-3 max-w-[52ch] text-[0.9375rem] leading-relaxed text-paper-dim">
+            {comingSoon.blurb}
+          </p>
         </div>
       </div>
     </section>

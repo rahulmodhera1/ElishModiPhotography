@@ -65,9 +65,9 @@ const FILES = [
   ["work/family/family-02.jpg", 1800, 1200, "family 02"],
   ["work/family/family-03.jpg", 1200, 1500, "family 03"],
 
-  ["work/portraits/portraits-01.jpg", 1200, 1500, "portraits 01"],
-  ["work/portraits/portraits-02.jpg", 1200, 1500, "portraits 02"],
-  ["work/portraits/portraits-03.jpg", 1800, 1200, "portraits 03"],
+  ["work/portraits/individual/individual-01.jpg", 1200, 1500, "individual 01"],
+  ["work/portraits/individual/individual-02.jpg", 1200, 1500, "individual 02"],
+  ["work/portraits/individual/individual-03.jpg", 1800, 1200, "individual 03"],
 
   ["work/vehicle/vehicle-01.jpg", 1800, 1200, "vehicle 01"],
   ["work/vehicle/vehicle-02.jpg", 1800, 1200, "vehicle 02"],
