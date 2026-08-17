@@ -7,10 +7,10 @@ import { comingSoon, formatPrice, offerings, type CategoryId } from "@/lib/work"
 import { RevealImage } from "./Reveal";
 
 /**
- * The six offerings, with what each one is and what it costs.
+ * The offerings, with what each one is and what it costs.
  *
- * Six items, six cells, no filler tile. Spans alternate 7/5, 5/7, 7/5 down a
- * twelve column bed so no two rows mirror each other.
+ * No filler tile. Spans alternate 7/5, 5/7, 7/5 down a twelve column bed so no
+ * two rows mirror each other, and the odd card out ends the grid full width.
  *
  * The caption sits below the image rather than over it. That keeps the price
  * legible whatever photograph the client uploads, and it keeps this section
@@ -22,6 +22,10 @@ import { RevealImage } from "./Reveal";
  * announced, not yet bookable, so it has no price, no photograph and no filter.
  */
 
+/* One per offering, in order. Seven cards is an odd number, so the last one
+   takes the full twelve rather than sitting alone in a seven and leaving five
+   columns of nothing beside it. Landscape is the one that carries it: the
+   large-format commission is the right thing to end the grid wide on. */
 const spans = [
   "lg:col-span-7",
   "lg:col-span-5",
@@ -29,6 +33,7 @@ const spans = [
   "lg:col-span-7",
   "lg:col-span-7",
   "lg:col-span-5",
+  "lg:col-span-12",
 ];
 
 /*

@@ -72,10 +72,47 @@ categories:
 | `portraits/couples/` | `couples-01.jpg` upward | `"couples"` |
 | `portraits/individual/` | `individual-01.jpg` upward | `"portraits"` |
 
-Two digits in the filename so the ordering stays stable. The **Couples** chip is
-already on the site and shows the empty state until the first couples photo is
-entered in `src/lib/work.ts`, so add the entries in the same commit as the
-files.
+Two digits in the filename so the ordering stays stable.
+
+The baby shower album lives in `couples/`. Four frames of it are in the manifest;
+four more are converted and sitting in the folder, deliberately left out:
+
+- `couples-02` and `couples-04` (the cake and the signed onesie) have the client
+  family's **surname written across the subject**. Putting a client's name on a
+  public page is Elish's call to make with them, not ours. Ask before adding.
+- `couples-03` is the décor with nobody in it, and `couples-01` is a wider,
+  harsher version of the frame that became `individual/individual-04.jpg`.
+
+Adding any of them back is one entry in `photos`; the files are already
+web-ready.
+
+## HEIC uploads
+
+Phones shoot HEIC and browsers other than Safari will not display it, so it can
+never be committed as-is. **`scripts/import-photos.mjs` cannot convert it**:
+sharp's libheif rejects iPhone's tiled HEIC outright ("Number of references in
+iref box (48) exceeds the security limits"). Convert with pillow-heif instead:
+
+```bash
+pip install pillow-heif pillow
+python3 - <<'EOF'
+import os, pillow_heif
+from PIL import Image, ImageOps
+pillow_heif.register_heif_opener()
+src = "public/images/work/<category>"
+for f in sorted(os.listdir(src)):
+    if not f.endswith(".HEIC"): continue
+    im = ImageOps.exif_transpose(Image.open(os.path.join(src, f))).convert("RGB")
+    im.thumbnail((2400, 2400), Image.LANCZOS)          # 2400 on the long edge
+    im.save(os.path.join(src, f[:-5] + ".jpg"), "JPEG",  # no exif= argument, so
+            quality=82, optimize=True, progressive=True) # nothing is carried over
+EOF
+```
+
+Then delete the `.HEIC` files. **`exif_transpose` and dropping the EXIF are both
+required**, not tidiness: without the first, frames land rotated; without the
+second, every file keeps the GPS coordinates of the shoot, and this repository is
+public.
 
 ## Product photography
 
