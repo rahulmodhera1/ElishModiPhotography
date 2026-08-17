@@ -144,6 +144,18 @@ export const offerings = [
     alt: "Placeholder: portrait offering card, single subject three quarter turn",
   },
   {
+    id: "couples" as const,
+    title: "Couples Portraits",
+    price: 150,
+    unit: "fixed" as const,
+    blurb:
+      "Unhurried sessions for two, photographed wherever you are most yourselves, from a walk through the city to the day you announce something.",
+    image: "/images/offerings/couples.jpg",
+    width: 1200,
+    height: 1500,
+    alt: "An expecting couple standing arm in arm under a balloon arch and a neon sign",
+  },
+  {
     id: "vehicle" as const,
     title: "Vehicle Photography",
     price: 60,
@@ -200,7 +212,11 @@ export const comingSoon = {
  * neither is like a car or a landscape commission.
  */
 export const pricingGroups = [
-  { id: "people" as const, label: "Portraits & Family", categories: ["baby", "child", "family", "portraits"] },
+  {
+    id: "people" as const,
+    label: "Portraits & Family",
+    categories: ["baby", "child", "family", "portraits", "couples"],
+  },
   { id: "places" as const, label: "Vehicle & Landscape", categories: ["vehicle", "landscape"] },
 ] satisfies { id: string; label: string; categories: CategoryId[] }[];
 
@@ -302,6 +318,22 @@ export const photos: Photo[] = [
     scale: "half",
   },
   {
+    src: "/images/work/portraits/couples/couples-07.jpg",
+    category: "couples",
+    alt: "An expecting couple photographed close, shoulder to shoulder, under a neon sign at their baby shower",
+    width: 1800,
+    height: 2400,
+    scale: "tall",
+  },
+  {
+    src: "/images/work/portraits/couples/couples-06.jpg",
+    category: "couples",
+    alt: "The same couple full length in front of a balloon arch, her hand resting on the bump",
+    width: 1800,
+    height: 2400,
+    scale: "tall",
+  },
+  {
     src: "/images/work/vehicle/vehicle-02.jpg",
     category: "vehicle",
     alt: "Placeholder: detail of a car's front wheel and badge at golden hour",
@@ -342,6 +374,22 @@ export const photos: Photo[] = [
     scale: "half",
   },
   {
+    src: "/images/work/portraits/couples/couples-09.jpg",
+    category: "couples",
+    alt: "Both of them throwing their arms wide beside the cake table, caught mid laugh",
+    width: 1800,
+    height: 2400,
+    scale: "tall",
+  },
+  {
+    src: "/images/work/portraits/individual/individual-04.jpg",
+    category: "portraits",
+    alt: "A man in a checked shirt photographed on his own in front of the balloon arch, hands in his pockets",
+    width: 1800,
+    height: 2400,
+    scale: "tall",
+  },
+  {
     src: "/images/work/baby/baby-03.jpg",
     category: "baby",
     alt: "Placeholder: baby held over a parent's shoulder, backlit doorway",
@@ -356,6 +404,14 @@ export const photos: Photo[] = [
     width: 1800,
     height: 1200,
     scale: "wide",
+  },
+  {
+    src: "/images/work/portraits/couples/couples-08.jpg",
+    category: "couples",
+    alt: "The couple either side of the cake table, laughing at something off frame",
+    width: 1800,
+    height: 2400,
+    scale: "tall",
   },
   {
     src: "/images/work/landscape/landscape-03.jpg",
